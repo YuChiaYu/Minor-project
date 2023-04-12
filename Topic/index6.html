@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>首頁</title>
+  <!-- <link rel="stylesheet" type="text/css" href="./css/index copy.css"> -->
+
+  <!-- 導覽列 -->
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial
+    }
+
+    .topnav {
+      overflow: hidden;
+      background-color: rgb(2, 2, 2);
+    }
+
+    .topnav a {
+      float: left;
+      display: block;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .active {
+      background-color: #020202;
+      color: white;
+    }
+
+    .topnav .icon {
+      display: none;
+    }
+
+    .dropdown {
+      float: left;
+      overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+      font-size: 17px;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 14px 16px;
+      background-color: inherit;
+      font-family: inherit;
+      margin: 0;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      float: none;
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
+
+    .topnav a:hover,
+    .dropdown:hover .dropbtn {
+      background-color: #555;
+      color: white;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    @media screen and (max-width: 600px) {
+
+      .topnav a:not(:first-child),
+      .dropdown .dropbtn {
+        display: none;
+      }
+
+      .topnav a.icon {
+        float: right;
+        display: block;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .topnav.responsive {
+        position: relative;
+      }
+
+      .topnav.responsive .icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+
+      .topnav.responsive .dropdown {
+        float: none;
+      }
+
+      .topnav.responsive .dropdown-content {
+        position: relative;
+      }
+
+      .topnav.responsive .dropdown .dropbtn {
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+    }
+  </style>
+
+  <!-- 登入 -->
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    .buttonA {
+      background-color: #0b0b0b;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .buttonA:hover {
+      opacity: 0.8;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #0b0b0b;
+    }
+
+    /* Center the image and position the close button */
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+      position: relative;
+    }
+
+    img.avatar {
+      width: 40%;
+      border-radius: 50%;
+    }
+
+    .container1 {
+      padding: 16px;
+    }
+
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal1 {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+      padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal1-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto;
+      /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 50%;
+      /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close1 {
+      position: absolute;
+      right: 25px;
+      top: 0;
+      color: #000;
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    .close1:hover,
+    .close1:focus {
+      color: red;
+      cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate1 {
+      -webkit-animation: animatezoom 0.6s;
+      animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+      from {
+        -webkit-transform: scale(0)
+      }
+
+      to {
+        -webkit-transform: scale(1)
+      }
+    }
+
+    @keyframes animatezoom {
+      from {
+        transform: scale(0)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+      span.psw {
+        display: block;
+        float: none;
+      }
+
+      .cancelbtn1 {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      .modal1-content {
+        width: 80%;
+      }
+    }
+  </style>
+
+  <!-- 註冊 -->
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus,
+    input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* Set a style for all buttons */
+    .buttonB {
+      background-color: #030303;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+      border: 2px solid white;
+    }
+
+    .buttonB:hover {
+      opacity: 1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+      padding: 14px 20px;
+      background-color: #080808;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn,
+    .signupbtn {
+      float: left;
+      width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+      padding: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top: 50px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto;
+      /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 50%;
+      /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    /* The Close Button (x) */
+    .close2 {
+      position: absolute;
+      right: 35px;
+      top: 15px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #fcfbfb;
+    }
+
+
+
+    .close2:hover,
+    .close2:focus {
+      color: #f44336;
+      cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+
+      .cancelbtn,
+      .signupbtn {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      .modal-content {
+        width: 80%;
+      }
+    }
+  </style>
+
+  <!-- 幻燈片 -->
+  <style>
+    * {
+      box-sizing: border-box
+    }
+
+    /* Slideshow container */
+    .slideshow-container {
+      max-width: 100%;
+      /* height: 550px; */
+      margin-top: -50px;
+
+
+    }
+
+    /* Hide the images by default */
+    .mySlides {
+      display: none;
+    }
+
+    /* Next & previous buttons */
+    .prev,
+    .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      margin-top: -22px;
+      padding: 16px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .prev:hover,
+    .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Caption text */
+
+
+    /* Number text (1/3 etc) */
+    .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+    }
+
+    /* The dots/bullets/indicators */
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active,
+    .dot:hover {
+      background-color: #050505;
+    }
+
+    /* Fading animation */
+    .fade {
+      animation-name: fade;
+      animation-duration: 1.5s;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: .4
+      }
+
+      to {
+        opacity: 1
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+
+      #pn{
+        position: relative;
+        display: inline;
+        /* background-color: #f44336; */
+        width: 100px;
+        top: -150px;
+        /* margin-top: ; */
+      }
+      .prev {
+        position: relative;
+        /* background-color: aquamarine; */
+        bottom: -20px;
+        /* margin-top: 10px; */
+
+        
+      }
+      .next {
+        /* background-color: rgb(202, 12, 117); */
+        position: relative;
+        /* margin-top: 0; */
+        margin-left: 90%;
+      }
+    }
+  </style>
+  <!-- 頁尾 -->
+  <style>
+    footer {
+      width: 100%;
+      height: 300px;
+      background-color: rgb(11, 11, 11);
+      margin-top: 120px;
+      display: flex;
+      position: relative;
+      padding: 20px 0px 20px 50px;
+      /* border-radius: 10px; */
+    }
+
+    .FtLogo {
+      flex: 3;
+      background-image: url(./imge/qrcode_localhost.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      margin: 50px 10px;
+      padding: 10px;
+      height: 200px;
+      width: 200px;
+
+    }
+
+    .FtSocial {
+      flex: 9;
+      background-color: rgb(249, 248, 247);
+      height: 200px;
+      margin: 45px;
+      margin-left: -20px;
+      text-align: center;
+      border-radius: 5px;
+      padding: 50px;
+    }
+
+
+    #demo {
+      margin-top: 20px;
+      margin-left: 300px;
+      font-size: 20px;
+      width: 40em;
+      height: 1.25em;
+      border-right: 1px solid transparent;
+      animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+      font-family: Consolas, Monaco;
+      word-break: break-all;
+      overflow: hidden;
+    }
+
+    /* 列印效果 */
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 20em;
+      }
+    }
+
+    /* 游標閃啊閃 */
+    @keyframes blink-caret {
+
+      from,
+      to {
+        border-color: transparent;
+      }
+
+      50% {
+        border-color: currentColor;
+      }
+    }
+  </style>
+  <!-- 內容卡組 -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Float four columns side by side */
+    .column {
+      float: left;
+      width: 70%;
+      padding: 0 10px;
+      margin-top: 20px;
+    }
+
+    .column-1 {
+      float: left;
+      width: 30%;
+      padding: 0 10px;
+      margin-top: 20px;
+    }
+
+    /* Remove extra left and right margins, due to padding in columns */
+    .row {
+      margin: -30px -5px;
+      height: 800px;
+      padding: 50px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      /* this adds the "card" effect */
+      padding: 16px;
+      text-align: center;
+      background-color: #ffffff;
+      height: 300px;
+      border: 1px solid black;
+    }
+
+    .card1 {
+      padding: 16px;
+      text-align: center;
+      height: 300px;
+    }
+
+    /* Responsive columns - one column layout (vertical) on small screens */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+
+      .column-1 {
+        width: 100%;
+      }
+    }
+
+    /* 按鈕動畫樣式*/
+
+    .bttt {
+      padding: 10px 20px;
+      font-size: 15px;
+      text-align: center;
+      cursor: pointer;
+      outline: none;
+      color: #fff;
+      background-color: #050505;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 3px #999;
+    }
+
+    .bttt:hover {
+      background-color: #434543
+    }
+
+    .bttt:active {
+      background-color: #414341;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+  </style>
+  <!-- 頁尾   -->
+  <style>
+    .row1 {
+      width: 100%;
+      height: 270px;
+    }
+
+    .column1 {
+      float: left;
+      width: 10%;
+      padding: 0 10px;
+      margin-top: 20px;
+    }
+
+    .column2 {
+      float: left;
+      width: 90%;
+      padding: 0 10px;
+      margin-top: 20px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .FtSocial {
+        text-align: center;
+        width: 100%;
+      }
+
+      .FtLogo {
+        display: none;
+      }
+
+      #demo {
+        margin-top: 20px;
+        margin-left: 300px;
+        font-size: 20px;
+        width: 40em;
+        height: 1.25em;
+        border-right: 1px solid transparent;
+        animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+        font-family: Consolas, Monaco;
+        word-break: break-all;
+        overflow: hidden;
+
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      .FtSocial {
+        text-align: center;
+        width: 100%;
+      }
+
+      .FtLogo {
+        display: none;
+      }
+
+      #demo {
+        margin-top: 40px;
+        margin-left: 10px;
+        font-size: 18px;
+      }
+    }
+  </style>
+  <!-- 回到頁首 -->
+  <style>
+    aside {
+      width: 100px;
+      height: 100px;
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+      background-image: url(./imge/往上箭頭.png);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: transparent;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 導覽列 -->
+  <div class="topnav" id="myTopnav">
+    <a href="./index6.html" class="active">首頁</a>
+    <a href="#home" class="active" onclick="document.getElementById('id01').style.display='block'">登入</a>
+    <a href="#home" class="active" onclick="document.getElementById('id02').style.display='block'">註冊</a>
+    <div class="dropdown">
+      <button class="dropbtn">計算機
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="./cul6.html">計算身體各項指數</a>
+        <a href="./cal6.html">卡路里計算機</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <button class="dropbtn">尋找場所
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="./gym6.html">附近健身房</a>
+        <a href="./food6.html">健康餐點</a>
+      </div>
+    </div>
+    <a href="./question6.html">常見問題</a>
+    <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+  </div>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+  </script>
+  <!-- 登入 -->
+  <div id="id01" class="modal1">
+
+    <form class="modal1-content animate" action="/action_page.php" method="post">
+      <div class="imgcontainer">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close1"
+          title="Close Modal">&times;</span>
+      </div>
+
+      <div class="container1">
+        <label for="uname"><b>信箱</b></label>
+        <input type="text" placeholder="請輸入信箱" name="uname" required>
+
+        <label for="psw"><b>密碼</b></label>
+        <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+        <button type="submit" class="buttonA">登入</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> 記住帳號
+        </label>
+      </div>
+
+      <div class="container1" style="background-color:#f1f1f1">
+        <button type="button" onclick="document.getElementById('id01').style.display='none'"
+          class="cancelbtn1 buttonA">取消</button>
+        <span class="psw"><a href="#">忘記密碼</a></span>
+      </div>
+    </form>
+  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal1) {
+        modal1.style.display = "none";
+      }
+    }
+  </script>
+  <!-- 註冊 -->
+  <div id="id02" class="modal">
+    <span onclick="document.getElementById('id02').style.display='none'" class="close2"
+      title="Close Modal">&times;</span>
+    <form class="modal-content" action="/action_page.php">
+      <div class="container">
+        <label for="email"><b>信箱</b></label>
+        <input type="text" placeholder="請輸入信箱" name="email" required>
+
+        <label for="psw"><b>密碼</b></label>
+        <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+        <label for="psw-repeat"><b>確認密碼</b></label>
+        <input type="password" placeholder="請再次輸入密碼" name="psw-repeat" required>
+
+        <label>
+          <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">記住帳號
+        </label>
+
+        <p>請先閱讀<a href="#" style="color:dodgerblue">使用者條款</a>.</p>
+
+        <div class="clearfix">
+          <button type="button" onclick="document.getElementById('id02').style.display='none'"
+            class="cancelbtn buttonB">取消</button>
+          <button type="submit" class="signupbtn buttonB">註冊</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById('id02');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+  <br><br><br>
+  <!-- 幻燈片 -->
+  <!-- Slideshow container -->
+  <div class="slideshow-container">
+
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
+      <div class="numbertext"></div>
+      <img src="../Topic/imge/1.jpg" style="width:100%">
+      <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+      <div class="numbertext"></div>
+      <img src="../Topic/imge/2.jpg" style="width:100%">
+      <div class="text"></div>
+    </div>
+
+    <div class="mySlides fade">
+      <div class="numbertext"></div>
+      <img src="../Topic/imge/3.jpg" style="width:100%">
+      <div class="text"></div>
+    </div>
+
+    <!-- Next and previous buttons -->
+    <div id="pn">
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <!-- The dots/circles -->
+    <div style="text-align:center" id="dott">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+  </div>
+  <script>
+    // 自動幻燈片
+    var slideIndex = 0;
+    carousel();
+
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+      }
+      slideIndex++;
+      if (slideIndex > x.length) { slideIndex = 1 }
+      x[slideIndex - 1].style.display = "block";
+      setTimeout(carousel, 3000); // Change image every 2 seconds
+
+      // 小黑點
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+      
+    }
+    
+
+    // 手動幻燈片
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+
+
+
+
+  </script>
+  <!-- <script type="text/javascript" src="./js/index.js"></script> -->
+  <!-- 小工具介紹 -->
+
+  <h1 style="text-align: center;font-size: 50px;margin-top: 50px;margin-bottom:0;">健康小工具</h1>
+  <hr>
+  <div class="row">
+    <div class="column-1">
+      <div class="card1">
+        <img src="./imge/體重.jpeg" height="100%" width="100%">
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <h1>計算身體數值</h1>
+        <h3>計算BMI,BMR,TDEE</h3>
+        <h4>這些數據可以讓我們知道<br>到底我們攝取的熱量有沒有超標而造成肥胖</h4>
+        <a target="_blank" href="./cul6.html"><button class="bttt">前往</button></a>
+      </div>
+    </div>
+    <div class="column-1">
+      <div class="card1">
+        <img src="./imge/吃東西.jpg" height="100%" width="100%">
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <h1>熱量計算機</h1>
+        <h3>計算你的TDEE(熱量盈餘)</h3>
+        <h4>讓我們知道今天攝取(消耗)多少熱量</h4>
+        <a target="_blank" href="./cal6.html"><button class="bttt">前往</button></a>
+      </div>
+    </div>
+    <div class="column-1">
+      <div class="card1">
+        <img src="./imge/健身2.jpg" height="100%" width="100%">
+      </div>
+    </div>
+    <div class="column">
+      <div class="card">
+        <h1>尋找健身房</h1>
+        <h3>開啟定位</h3>
+        <h4>尋找附近的健身房,動起來</h4>
+        <a target="_blank" href="./gym6.html"><button class="bttt">前往</button></a>
+      </div>
+    </div>
+    <div class="column-1">
+      <div class="card1">
+        <img src="./imge/沙拉拷貝.jpg" height="100%" width="100%">
+      </div>
+    </div>
+    <div class="column" style="margin-bottom: 100px;">
+      <div class="card">
+        <h1>尋找健康餐</h1>
+        <h3>開啟定位</h3>
+        <h4>尋找附近的健康食物<br>在也不用因為找不到健康的食物而放棄減肥了</h4>
+        <a target="_blank" href="./food6.html"><button class="bttt">前往</button></a>
+      </div>
+    </div>
+  </div>
+  <div>
+
+  </div>
+  <!-- 頁尾 -->
+  <footer class="row1">
+    <div class="FtLogo column1"></div>
+    <div class="FtSocial column2">
+      <div id="demo">如果對減肥減脂有興趣的話,歡迎聯絡我們</div>
+      <br>
+      <br>
+      <br>
+      <div>聯絡信箱 abc0800.gmail.com,聯絡電話 0800-123-123</div>
+    </div>
+  </footer>
+  <!-- 回到頁首 -->
+  <a href="#myTopnav">
+    <aside></aside>
+  </a>
+</body>
+
+</html>

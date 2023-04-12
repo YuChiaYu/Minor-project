@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>計算身體數值</title>
+    <link rel="stylesheet" href="./css動畫/animate.css">
+    <link rel="stylesheet" href="./css動畫/loading.css">
+</head>
+<!-- 導覽列 -->
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: rgb(2, 2, 2);
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .active {
+        background-color: #020202;
+        color: white;
+    }
+
+    .topnav .icon {
+        display: none;
+    }
+
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+        font-size: 17px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .topnav a:hover,
+    .dropdown:hover .dropbtn {
+        background-color: #555;
+        color: white;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .topnav a:not(:first-child),
+        .dropdown .dropbtn {
+            display: none;
+        }
+
+        .topnav a.icon {
+            float: right;
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .topnav.responsive {
+            position: relative;
+        }
+
+        .topnav.responsive .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .topnav.responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+
+        .topnav.responsive .dropdown {
+            float: none;
+        }
+
+        .topnav.responsive .dropdown-content {
+            position: relative;
+        }
+
+        .topnav.responsive .dropdown .dropbtn {
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+    }
+</style>
+
+<!-- 登入 -->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    .buttonA {
+        background-color: #0b0b0b;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .buttonA:hover {
+        opacity: 0.8;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #0b0b0b;
+    }
+
+    /* Center the image and position the close button */
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 40%;
+        border-radius: 50%;
+    }
+
+    .container1 {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal1 {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal1-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 50%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close1 {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close1:hover,
+    .close1:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate1 {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn1 {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .modal1-content {
+            width: 80%;
+        }
+    }
+</style>
+
+<!-- 註冊 -->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus,
+    input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Set a style for all buttons */
+    .buttonB {
+        background-color: #030303;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        border: 2px solid white;
+    }
+
+    .buttonB:hover {
+        opacity: 1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #080808;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn,
+    .signupbtn {
+        float: left;
+        width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 50px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 50%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* The Close Button (x) */
+    .close2 {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #fcfbfb;
+    }
+
+
+
+    .close2:hover,
+    .close2:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+
+        .cancelbtn,
+        .signupbtn {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .modal-content {
+            width: 80%;
+        }
+    }
+</style>
+<!-- 圖片文宣 -->
+<style>
+    .responsive {
+        max-width: 100%;
+        height: auto;
+    }
+
+    #pic {
+        margin-top: -60px;
+    }
+</style>
+
+<!-- 計算小動畫 -->
+<style>
+    .lds-hourglass {
+        display: inline-block;
+        position: relative;
+        width: 80px;
+        height: 80px;
+    }
+
+    .lds-hourglass:after {
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        width: 0;
+        height: 0;
+        margin: 8px;
+        box-sizing: border-box;
+        border: 80px solid rgb(3, 3, 3);
+        border-color: rgb(6, 6, 6) transparent rgb(9, 9, 9) transparent;
+        animation: lds-hourglass 1.2s infinite;
+        position: absolute;
+        bottom: -150%;
+        left: 400%;
+    }
+
+    @keyframes lds-hourglass {
+        0% {
+            transform: rotate(0);
+            animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+        }
+
+        50% {
+            transform: rotate(900deg);
+            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+
+        100% {
+            transform: rotate(1800deg);
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .lds-hourglass:after {
+            bottom: -150%;
+            left: 150%;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .lds-hourglass:after {
+            bottom: -150%;
+            left: 90%;
+        }
+    }
+</style>
+<!-- 計算區 -->
+<style>
+    .cal-body2 {
+        font-size: 20px;
+        width: 60%;
+        padding: 10px 10px;
+        margin: 10% 0 5% 20%;
+        border: 2px black solid;
+        border-radius: 10px;
+        left: 800px;
+        bottom: 100px;
+    }
+
+
+    @media screen and (max-width: 1000px) {
+        .cal-body2 {
+            margin-top: 150px;
+        }
+
+    }
+
+    #as {
+        border: #000 solid 2px;
+        width: 62%;
+        height: 300px;
+        margin: 10% 0 5% 20%;
+        border-radius: 10px;
+        bottom: 0px;
+        padding-top: 30px;
+    }
+
+    input {
+        line-height: 30px;
+        margin-top: 5px;
+
+    }
+
+    select {
+        height: 40px;
+        margin-top: 10px;
+    }
+
+    #bn-cal-body {
+        background-color: #050505;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        cursor: pointer;
+        margin: 30px 30% 30px 40%;
+
+    }
+
+    #bn-cal-body:hover {
+        opacity: 0.8;
+    }
+
+
+
+    .b-result {
+        margin-top: 100px;
+    }
+
+    .bodytext {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    #bodybt {
+        /* margin-top: 20px; */
+        left: 160px;
+        /* display: none; */
+    }
+
+    #abc {
+        display: none;
+    }
+</style>
+<style>
+    /* Set a style for all buttons */
+    #bodybt2 {
+        background-color: #070807;
+        color: white;
+        padding: 14px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, 90%);
+
+        /* margin-left: 45%; */
+    }
+
+    #bodybt2:hover {
+        opacity: 0.8;
+    }
+
+
+    /* Center the image and position the close button */
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 40%;
+        border-radius: 50%;
+    }
+
+    .container {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal3 {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal3-content {
+        background-color: #fefefe;
+        margin: -5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 80%;
+        padding: 50PX 100PX 100PX 100PX;
+
+        /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close3 {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close3:hover,
+    .close3:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .animate__animated {
+            color: rgb(3, 3, 3);
+        }
+
+        .modal3-content {
+        padding: 10PX 10PX 10PX 10PX;
+    }
+    }
+</style>
+<style>
+    table {
+        border: #000 solid 2px;
+    }
+
+    td,
+    th {
+        border: #000 solid 1px;
+    }
+</style>
+<!-- 頁尾 -->
+<style>
+    footer {
+        width: 100%;
+        /* height: 300px; */
+        background-color: rgb(11, 11, 11);
+        margin-top: 120px;
+        display: flex;
+        position: relative;
+        padding: 20px 0px 20px 50px;
+        /* border-radius: 10px; */
+    }
+
+    .FtLogo {
+        flex: 3;
+        background-image: url(./imge/qrcode_localhost.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 50px 10px;
+        padding: 10px;
+        height: 200px;
+        width: 200px;
+
+    }
+
+    .FtSocial {
+        flex: 9;
+        background-color: rgb(249, 248, 247);
+        height: 200px;
+        margin: 45px 45px 25px 45px;
+        margin-left: -20px;
+        text-align: center;
+        border-radius: 5px;
+        padding: 50px;
+    }
+
+
+    #demo {
+        margin-top: 20px;
+        margin-left: 300px;
+        font-size: 20px;
+        width: 40em;
+        height: 1.25em;
+        border-right: 1px solid transparent;
+        animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+        font-family: Consolas, Monaco;
+        word-break: break-all;
+        overflow: hidden;
+    }
+
+    /* 列印效果 */
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 20em;
+        }
+    }
+
+    /* 游標閃啊閃 */
+    @keyframes blink-caret {
+
+        from,
+        to {
+            border-color: transparent;
+        }
+
+        50% {
+            border-color: currentColor;
+        }
+    }
+</style>
+<style>
+    .row1 {
+        width: 100%;
+        /* height: 270px; */
+    }
+
+    .column1 {
+        float: left;
+        width: 10%;
+        padding: 0 10px;
+        margin-top: 20px;
+    }
+
+    .column2 {
+        float: left;
+        width: 90%;
+        padding: 0 10px;
+        margin-top: 20px;
+    }
+
+    @media screen and (max-width: 600px) {
+        .FtSocial {
+            text-align: center;
+            width: 100%;
+        }
+
+        .FtLogo {
+            display: none;
+        }
+
+        #demo {
+            margin-top: 20px;
+            margin-left: 300px;
+            font-size: 20px;
+            width: 40em;
+            height: 1.25em;
+            border-right: 1px solid transparent;
+            animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+            font-family: Consolas, Monaco;
+            word-break: break-all;
+            overflow: hidden;
+
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .FtSocial {
+            text-align: center;
+            width: 100%;
+        }
+
+        .FtLogo {
+            display: none;
+        }
+
+        #demo {
+            margin-top: 40px;
+            margin-left: 10px;
+            font-size: 18px;
+        }
+    }
+</style>
+<!-- 回到頁首 -->
+<style>
+    aside {
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        background-image: url(./imge/往上箭頭.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: transparent;
+    }
+</style>
+
+<body>
+    <!-- 導覽列 -->
+    <div class="topnav" id="myTopnav">
+        <a href="./index6.html" class="active">首頁</a>
+        <a href="#home" class="active" onclick="document.getElementById('id01').style.display='block'">登入</a>
+        <a href="#home" class="active" onclick="document.getElementById('id02').style.display='block'">註冊</a>
+        <div class="dropdown">
+            <button class="dropbtn">計算機
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="./cul6.html">計算身體各項指數</a>
+                <a href="./cal6.html">卡路里計算機</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">尋找場所
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="./gym6.html">附近健身房</a>
+                <a href="./food6.html">健康餐點</a>
+            </div>
+        </div>
+        <a href="./question6.html">常見問題</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+    <!-- 登入 -->
+    <div id="id01" class="modal1">
+
+        <form class="modal1-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close1"
+                    title="Close Modal">&times;</span>
+            </div>
+
+            <div class="container1">
+                <label for="uname"><b>信箱</b></label>
+                <input type="text" placeholder="請輸入信箱" name="uname" required>
+
+                <label for="psw"><b>密碼</b></label>
+                <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+                <button type="submit" class="buttonA">登入</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> 記住帳號
+                </label>
+            </div>
+
+            <div class="container1" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn1 buttonA">取消</button>
+                <span class="psw"><a href="#">忘記密碼</a></span>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            }
+        }
+    </script>
+    <!-- 註冊 -->
+    <div id="id02" class="modal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close2"
+            title="Close Modal">&times;</span>
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <label for="email"><b>信箱</b></label>
+                <input type="text" placeholder="請輸入信箱" name="email" required>
+
+                <label for="psw"><b>密碼</b></label>
+                <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+                <label for="psw-repeat"><b>確認密碼</b></label>
+                <input type="password" placeholder="請再次輸入密碼" name="psw-repeat" required>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">記住帳號
+                </label>
+
+                <p>請先閱讀<a href="#" style="color:dodgerblue">使用者條款</a>.</p>
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                        class="cancelbtn buttonB">取消</button>
+                    <button type="submit" class="signupbtn buttonB">註冊</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id02');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <!-- 輸入區 -->
+    <div class="cal-body" id="cal-body">
+        <div class="cal-body2">
+            <label for="select1">性別：</label>
+            <select id="select1">
+                <option value="1">男生</option>
+                <option value="0">女生</option>
+            </select><br>
+            <label for="bhight">身高：</label>
+            <input placeholder="請輸入公分" type="number" id="bhight"><br>
+            <label for="bweight">體重：</label>
+            <input placeholder="請輸入公斤" type="number" id="bweight"><br>
+            <label for="age">年齡：</label>
+            <input placeholder="請輸入歲數" type="number" id="age"><br>
+            <label for="select2">活動因子：</label>
+            <select id="select2">
+                <option value="1.2">無活動(臥床)</option>
+                <option value="1.375">輕度活動(久坐
+                    每週從事運動1-3天)</option>
+                <option value="1.55">中度活動(站走稍多
+                    每週從事運動3-5天)</option>
+                <option value="1.725">高度活動(站走為主
+                    每週運動6-7天)</option>
+                <option value="1.9">非常高度活動(整天進行高強度的運動)</option>
+            </select><br>
+
+            <div></div>
+            <div style="display: flex;">
+                <button id="bn-cal-body">
+                    計算
+                </button>
+            </div>
+
+            <br>
+            <div id="result"></div>
+
+        </div>
+        <div id="as">
+            <div id="animate" style="display: flex;
+            justify-content: center;
+            padding:80px 50px 20px 50px;">
+                <div class="animate__animated animate__bounce" style="animation-iteration-count: infinite;
+                font-size: 40px;
+                ">just test it
+                </div>
+            </div>
+
+            <div id="animate2" style="display: none;">
+                <!-- <div id="animate2"> -->
+                <div class="lds-hourglass"></div>
+            </div>
+            <div id="abc">
+                <div id="BMI" class="bodytext"></div>
+                <div id="BMR" class="bodytext"></div>
+                <div id="TDEE" class="bodytext"></div>
+                <div id="bodybt">
+                    <button onclick="document.getElementById('id03').style.display='block'" style="width:auto;" id="bodybt2">
+                        點我看更多
+                    </button>
+                </div>
+            </div>
+
+            <div id="id03" class="modal3">
+                <form class="modal3-content animate">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id03').style.display='none'" class="close3"
+                            title="Close Modal">&times;</span>
+                    </div>
+                    <div class="container3" style="display: block;width: 80%;">
+                        <div id="bmi2">
+                            <h1>BMI 身體質量指數</h1>
+                            <h4>世界衛生組織以BMI來衡量肥胖程度</h4>
+                            <table id="table1">
+                                <tr>
+                                    <th>體重過輕</th>
+                                    <th>健康體重</th>
+                                    <th>體重過重</th>
+                                    <th>肥胖</th>
+                                </tr>
+                                <tr>
+                                    <td>BMI < 18.5</td>
+                                    <td>18.5 ≤ BMI < 24</td>
+                                    <td>24 ≤ BMI < 27</td>
+                                    <td>BMI ≥ 27</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <br><br>
+                        <div id="bmr2">
+                            <h1>BMR 基礎代謝率</h1>
+                            <h4>指人體在休息狀態下，維持新陳代謝所需的熱量<br>
+                                BMR 會隨著年紀增加或體重減輕而降低，會隨著肌肉量增加而上升。<br>
+                                也就是說如果想要“呼吸就會瘦“的易瘦體質，把肌肉練上去就能夠達成了</h4>
+                        </div>
+                        <br><br>
+                        <div id="tdee2">
+                            <h1>TDEE 每日總熱量消耗</h1>
+                            <h4>TDEE 是身體一整天下來，包括基礎代謝、活動量、吃東西所消耗的熱量。</h4>
+                            <table>
+                                <tr>
+                                    <th>維持體重</th>
+                                    <th>減少脂肪</th>
+                                    <th>增加肌肉</th>
+                                </tr>
+                                <tr>
+                                    <td>每日維持攝取TDEE</td>
+                                    <td>每日攝取TDEE-300~500大卡</td>
+                                    <td>每日攝取TDEE+300~500大卡</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script>
+
+            // document.getElementById("bn-cal-body").onclick = function () {
+            //         hight = parseFloat(document.getElementById("bhight").value)
+            //         weight = parseFloat(document.getElementById("bweight").value)
+            //         age = parseFloat(document.getElementById("age").value)
+
+            //         select1 = parseFloat(document.getElementById("select1").value)
+            //         select2 = parseFloat(document.getElementById("select2").value)
+
+            //         BMI = document.getElementById("BMI")
+            //         BMR = document.getElementById("BMR")
+            //         TDEE = document.getElementById("TDEE")
+            //         // console.log(select1)
+
+            //         result = document.getElementById("result")
+            //         result.innerHTML = ""
+
+            //         // 禁空值跟負數
+            //         if (isNaN(hight) || isNaN(weight) || isNaN(age)) {
+            //             result.innerHTML = "欄位不可以有空位"
+            //             result.style.color = "red"
+            //             BMI.innerHTML = ""
+            //             BMR.innerHTML = ""
+            //             TDEE.innerHTML = ""
+            //             document.getElementById("bodybt").style.display = "none";
+            //             return
+            //         }
+            //         if (hight <= 0 || weight <= 0 || age < 0) {
+            //             result.innerHTML = "身高 體重 年齡 必須大於0"
+            //             result.style.color = "red"
+            //             BMI.innerHTML = ""
+            //             BMR.innerHTML = ""
+            //             TDEE.innerHTML = ""
+            //             document.getElementById("bodybt").style.display = "none";
+            //             return
+            //         }
+
+            //         // bmi計算
+            //         var a = weight / Math.pow(hight / 100, 2)
+            //         var b = a.toFixed(2)
+            //         BMI.innerHTML = "BMI=" + b
+
+
+            //         // 基礎代謝計算BMR 總熱量消耗TDEE
+            //         if (select1 > 0) {
+            //             var bmrboy = 10 * weight + 6.25 * hight - 5 * age + 5
+            //             BMR.innerHTML = "BMR=" + bmrboy
+            //             var tdeeboy = bmrboy * select2
+            //             TDEE.innerHTML = "TDEE=" + tdeeboy.toFixed(2)
+
+
+            //             document.getElementById("bodybt").style.display = "block";
+
+            //         } else {
+            //             var bmrgirl = 10 * weight + 6.25 * hight - 5 * age - 161
+            //             BMR.innerHTML = "BMR=" + bmrgirl
+            //             var tdeegirl = bmrgirl * select2
+            //             TDEE.innerHTML = "TDEE=" + tdeegirl.toFixed(2)
+            //             document.getElementById("bodybt").style.display = "block";
+            //         }
+
+            //         if (!isNaN(hight) || !isNaN(weight) || !isNaN(age) || !hight <= 0 || !weight <= 0 || !age < 0) {
+            //             document.getElementById("animate").style.display = "none"
+            //         }
+            //         document.getElementById("bodybt2").style.display = "block"
+            //     }
+
+
+
+            // function f0() {
+
+            // }
+
+            function f1() {
+                var hight = parseFloat(document.getElementById("bhight").value)
+                var weight = parseFloat(document.getElementById("bweight").value)
+                var age = parseFloat(document.getElementById("age").value)
+
+                var select1 = parseFloat(document.getElementById("select1").value)
+                var select2 = parseFloat(document.getElementById("select2").value)
+
+                var BMI = document.getElementById("BMI")
+                var BMR = document.getElementById("BMR")
+                var TDEE = document.getElementById("TDEE")
+                // console.log(select1)
+
+                var result = document.getElementById("result")
+                result.innerHTML = ""
+
+                // bmi計算
+                var a = weight / Math.pow(hight / 100, 2)
+                var b = a.toFixed(2)
+                BMI.innerHTML = "BMI=" + b
+
+
+                // 基礎代謝計算BMR 總熱量消耗TDEE
+                if (select1 > 0) {
+                    var bmrboy = 10 * weight + 6.25 * hight - 5 * age + 5
+                    BMR.innerHTML = "BMR=" + bmrboy
+                    var tdeeboy = bmrboy * select2
+                    TDEE.innerHTML = "TDEE=" + tdeeboy.toFixed(2)
+
+
+                    // document.getElementById("bodybt").style.display = "block";
+                    document.getElementById("abc").style.display = "block";
+
+                } else {
+                    var bmrgirl = 10 * weight + 6.25 * hight - 5 * age - 161
+                    BMR.innerHTML = "BMR=" + bmrgirl
+                    var tdeegirl = bmrgirl * select2
+                    TDEE.innerHTML = "TDEE=" + tdeegirl.toFixed(2)
+                    // document.getElementById("bodybt").style.display = "block";
+                    document.getElementById("abc").style.display = "block";
+                }
+
+                // if (!isNaN(hight) || !isNaN(weight) || !isNaN(age) || !hight <= 0 || !weight <= 0 || !age < 0) {
+                //     document.getElementById("animate").style.display = "none"
+                // }
+            }
+
+            function f2() {
+                document.getElementById("animate2").style.display = "none"
+                document.getElementById("bodybt").style.display = "block"
+                document.getElementById("abc").style.display = "block"
+
+            }
+
+
+
+
+            document.getElementById("bn-cal-body").onclick = function () {
+
+                // document.getElementById("abc").style.display = "none"
+                document.getElementById("bodybt").style.display = "none"
+                document.getElementById("BMI").innerHTML = ""
+                document.getElementById("BMR").innerHTML = ""
+                document.getElementById("TDEE").innerHTML = ""
+
+                var hight = parseFloat(document.getElementById("bhight").value)
+                var weight = parseFloat(document.getElementById("bweight").value)
+                var age = parseFloat(document.getElementById("age").value)
+
+                var select1 = parseFloat(document.getElementById("select1").value)
+                var select2 = parseFloat(document.getElementById("select2").value)
+
+                var BMI = document.getElementById("BMI")
+                var BMR = document.getElementById("BMR")
+                var TDEE = document.getElementById("TDEE")
+                // console.log(select1)
+
+                var result = document.getElementById("result")
+                result.innerHTML = ""
+
+
+                // 禁空值跟負數
+                if (isNaN(hight) || isNaN(weight) || isNaN(age)) {
+                    result.innerHTML = "欄位不可以有空位"
+                    result.style.color = "red"
+                    BMI.innerHTML = ""
+                    BMR.innerHTML = ""
+                    TDEE.innerHTML = ""
+                    // document.getElementById("bodybt").style.display = "none";
+                    document.getElementById("abc").style.display = "none";
+                    return
+                }
+                if (hight <= 0 || weight <= 0 || age < 0) {
+                    result.innerHTML = "身高 體重 年齡 必須大於0"
+                    result.style.color = "red"
+                    BMI.innerHTML = ""
+                    BMR.innerHTML = ""
+                    TDEE.innerHTML = ""
+                    // document.getElementById("bodybt").style.display = "none";
+                    document.getElementById("abc").style.display = "none";
+                    return
+                }
+
+
+                if (!isNaN(hight) || !isNaN(weight) || !isNaN(age) || !hight <= 0 || !weight <= 0 || !age < 0) {
+                    document.getElementById("animate").style.display = "none"
+                    document.getElementById("animate2").style.display = "block"
+                    // document.getElementById("bodybt2").style.display = "block"
+                    document.getElementById("abc").style.display = "block"
+                    // document.getElementById("bodybt").style.display = "block"
+                    setTimeout(f1, 3000)
+                    setTimeout(f2, 3000)
+                    // document.getElementById("abc").display="none"
+                    // document.getElementById("BMR").innerHTML=""
+                    // document.getElementById("TDEE").innerHTML=""
+
+
+
+                }
+
+
+
+            }
+        </script>
+    </div>
+
+
+    <!-- 頁尾 -->
+    <footer class="row1">
+        <div class="FtLogo column1"></div>
+        <div class="FtSocial column2">
+            <div id="demo">如果對減肥減脂有興趣的話,歡迎聯絡我們</div>
+            <br>
+            <br>
+            <br>
+            <div>聯絡信箱 abc0800.gmail.com,聯絡電話 0800-123-123</div>
+        </div>
+    </footer>
+
+    <!-- 返回側邊 -->
+    <!-- 回到頁首 -->
+    <a href="#myTopnav">
+        <aside></aside>
+    </a>
+</body>
+
+</html>

@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>question6</title>
+</head>
+
+<!-- 導覽列 -->
+<style>
+    body {
+        margin: 0;
+        font-family: Arial
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: rgb(2, 2, 2);
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .active1 {
+        background-color: #020202;
+        color: white;
+    }
+
+    .topnav .icon {
+        display: none;
+    }
+
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+        font-size: 17px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .topnav a:hover,
+    .dropdown:hover .dropbtn {
+        background-color: #555;
+        color: white;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .topnav a:not(:first-child),
+        .dropdown .dropbtn {
+            display: none;
+        }
+
+        .topnav a.icon {
+            float: right;
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .topnav.responsive {
+            position: relative;
+        }
+
+        .topnav.responsive .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .topnav.responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+
+        .topnav.responsive .dropdown {
+            float: none;
+        }
+
+        .topnav.responsive .dropdown-content {
+            position: relative;
+        }
+
+        .topnav.responsive .dropdown .dropbtn {
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+    }
+</style>
+
+<!-- 登入 -->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    .buttonA {
+        background-color: #0b0b0b;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .buttonA:hover {
+        opacity: 0.8;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #0b0b0b;
+    }
+
+    /* Center the image and position the close button */
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 40%;
+        border-radius: 50%;
+    }
+
+    .container1 {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal1 {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal1-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 50%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close1 {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close1:hover,
+    .close1:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate1 {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn1 {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .modal1-content {
+            width: 80%;
+        }
+    }
+</style>
+
+<!-- 註冊 -->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus,
+    input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Set a style for all buttons */
+    .buttonB {
+        background-color: #030303;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        border: 2px solid white;
+    }
+
+    .buttonB:hover {
+        opacity: 1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #080808;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn,
+    .signupbtn {
+        float: left;
+        width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 50px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 50%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* The Close Button (x) */
+    .close2 {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #fcfbfb;
+    }
+
+
+
+    .close2:hover,
+    .close2:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+
+        .cancelbtn,
+        .signupbtn {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .modal-content {
+            width: 80%;
+        }
+    }
+</style>
+<style>
+    .accordion {
+        background-color: rgb(4, 4, 4);
+        color: rgb(250, 248, 248);
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+    .active,
+    .accordion:hover {
+        background-color: #ccc;
+    }
+
+    .panel {
+        padding: 0 18px;
+        display: none;
+        background-color: white;
+        overflow: hidden;
+    }
+</style>
+<!-- 折疊 -->
+<style>
+    .accordion1 {
+        background-color: rgb(3, 3, 3);
+        color: rgb(251, 249, 249);
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+    .active,
+    .accordion:hover {
+        background-color: rgb(67, 66, 66);
+    }
+
+    .panel {
+        padding: 0 18px;
+        display: none;
+        background-color: white;
+        overflow: hidden;
+    }
+
+    #q1,
+    #q2 {
+        padding: 50px 100px 20px 100px;
+    }
+</style>
+<!-- 頁尾   -->
+<style>
+    footer {
+        width: 100%;
+        /* height: 300px; */
+        background-color: rgb(11, 11, 11);
+        margin-top: 120px;
+        display: flex;
+        position: relative;
+        padding: 20px 0px 20px 50px;
+        /* border-radius: 10px; */
+    }
+
+    .FtLogo {
+        flex: 3;
+        background-image: url(./imge/qrcode_localhost.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 50px 10px;
+        padding: 10px;
+        height: 200px;
+        width: 200px;
+
+    }
+
+    .FtSocial {
+        flex: 9;
+        background-color: rgb(249, 248, 247);
+        height: 200px;
+        margin: 45px 45px 25px 45px;
+        margin-left: -20px;
+        text-align: center;
+        border-radius: 5px;
+        padding: 50px;
+    }
+
+
+    #demo {
+        margin-top: 20px;
+        margin-left: 300px;
+        font-size: 20px;
+        width: 40em;
+        height: 1.25em;
+        border-right: 1px solid transparent;
+        animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+        font-family: Consolas, Monaco;
+        word-break: break-all;
+        overflow: hidden;
+    }
+
+    /* 列印效果 */
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 20em;
+        }
+    }
+
+    /* 游標閃啊閃 */
+    @keyframes blink-caret {
+
+        from,
+        to {
+            border-color: transparent;
+        }
+
+        50% {
+            border-color: currentColor;
+        }
+    }
+</style>
+<style>
+    .row1 {
+        width: 100%;
+        /* height: 270px; */
+    }
+
+    .column1 {
+        float: left;
+        width: 10%;
+        padding: 0 10px;
+        margin-top: 20px;
+    }
+
+    .column2 {
+        float: left;
+        width: 90%;
+        padding: 0 10px;
+        margin-top: 20px;
+    }
+
+    @media screen and (max-width: 600px) {
+        .FtSocial {
+            text-align: center;
+            width: 100%;
+        }
+
+        .FtLogo {
+            display: none;
+        }
+
+        #demo {
+            margin-top: 20px;
+            margin-left: 300px;
+            font-size: 20px;
+            width: 40em;
+            height: 1.25em;
+            border-right: 1px solid transparent;
+            animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+            font-family: Consolas, Monaco;
+            word-break: break-all;
+            overflow: hidden;
+
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .FtSocial {
+            text-align: center;
+            width: 100%;
+        }
+
+        .FtLogo {
+            display: none;
+        }
+
+        #demo {
+            margin-top: 40px;
+            margin-left: 10px;
+            font-size: 18px;
+        }
+    }
+</style>
+<!-- 表單 -->
+<style>
+    #qdiv {
+        display: flex;
+        /* 水平置中 */
+        justify-content: center;
+        /* 垂直置中 */
+        align-items: center;
+        margin-top: 100px;
+        cursor: pointer;
+    }
+</style>
+<!-- 回到頁首 -->
+<style>
+    aside {
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        background-image: url(./imge/往上箭頭.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: transparent;
+    }
+</style>
+
+<body>
+    <!-- 導覽列 -->
+    <div class="topnav" id="myTopnav">
+        <a href="./index6.html" class="active1">首頁</a>
+        <a href="#home" class="active1" onclick="document.getElementById('id01').style.display='block'">登入</a>
+        <a href="#home" class="active1" onclick="document.getElementById('id02').style.display='block'">註冊</a>
+        <div class="dropdown">
+            <button class="dropbtn">計算機
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="./cul6.html">計算身體各項指數</a>
+                <a href="./cal6.html">卡路里計算機</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">尋找場所
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="./gym6.html">附近健身房</a>
+                <a href="./food6.html">健康餐點</a>
+            </div>
+        </div>
+        <a href="./question6.html">常見問題</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+    <!-- 登入 -->
+    <div id="id01" class="modal1">
+
+        <form class="modal1-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close1"
+                    title="Close Modal">&times;</span>
+            </div>
+
+            <div class="container1">
+                <label for="uname"><b>信箱</b></label>
+                <input type="text" placeholder="請輸入信箱" name="uname" required>
+
+                <label for="psw"><b>密碼</b></label>
+                <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+                <button type="submit" class="buttonA">登入</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> 記住帳號
+                </label>
+            </div>
+
+            <div class="container1" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn1 buttonA">取消</button>
+                <span class="psw"><a href="#">忘記密碼</a></span>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            }
+        }
+    </script>
+    <!-- 註冊 -->
+    <div id="id02" class="modal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close2"
+            title="Close Modal">&times;</span>
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <label for="email"><b>信箱</b></label>
+                <input type="text" placeholder="請輸入信箱" name="email" required>
+
+                <label for="psw"><b>密碼</b></label>
+                <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+                <label for="psw-repeat"><b>確認密碼</b></label>
+                <input type="password" placeholder="請再次輸入密碼" name="psw-repeat" required>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">記住帳號
+                </label>
+
+                <p>請先閱讀<a href="#" style="color:dodgerblue">使用者條款</a>.</p>
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                        class="cancelbtn buttonB">取消</button>
+                    <button type="submit" class="signupbtn buttonB">註冊</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id02');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <!-- 飲食問題 -->
+    <div id="q1">
+        <h1>減肥飲食常見問題</h1>
+        <button class="accordion">減肥可以不吃澱粉嗎？</button>
+        <div class="panel">
+            <p>攝取適量的澱粉類並不會影響減肥的效果，反之，減肥女性們若因怕變胖而選擇停止攝取澱粉類食物，
+                除了會造成體內代謝功能不佳外，能可能影響大腦內色胺酸的代謝，導致無端感到情緒不佳，
+                卻不知原來罪魁禍首就是自己。</p>
+            <p>因此當必須攝取澱粉類食物時，減肥女性更應在意的是要吃「未精緻全榖雜糧類」；
+                包括糙米、玉米、南瓜、地瓜、全麥土司等，不僅皆富含維生素B群、維生素E、礦物質及膳食纖維等多種營養素，
+                其中的膳食纖維更有助於腸胃蠕動、保護腸黏膜細胞與調節腸內細菌，維持腸道健康；維生素B群則具有調節新陳代謝
+                、燃燒脂肪、維持皮膚健康等功能，適量食用皆有益於減肥。</p>
+        </div>
+
+        <button class="accordion">減肥多吃水果青菜 少吃肉 這樣對嗎？</button>
+        <div class="panel">
+            <p>想減重蛋白質一定要吃夠。足夠的蛋白質可以幫助降低食慾、增加飽足感、減少體重回升、維持或增加新陳代謝率，在減肥期間保護肌肉量避免流失太多，請確保每餐都含有高蛋白食物。
+            <p>好的蛋白質不僅限於肉類或奶製品。豆類、藜麥（全穀雜糧）和亞麻仁籽也是含有較高蛋白質的食物。</p>
+            <p>吃足夠的膳食纖維可以讓你覺得飽飽飽，所以蔬菜一定要吃夠。減肥計畫過程一定要有飽足感才容易成功，每天飢餓無法持久。</p>
+
+        </div>
+
+        <button class="accordion">吃代餐真的可以減肥嗎？</button>
+        <div class="panel">
+            <p>由於代餐所提供的營養並不均衡，價格也較昂貴，內含的膳食纖維也較不足，長期使用可能易出現營養不良的問題。因此，先從日常生活及飲食習慣開始改變才是減肥的正確之道，否則過多的代餐不但讓荷包失血，停止食用後還容易有復胖的風險。
+            </p>
+        </div>
+
+        <button class="accordion">健康的食物吃太多沒關係</button>
+        <div class="panel">
+            <p>吃太多容易減肥失敗。就算是好的肉好油例如海鮮、雞胸肉、堅果也都是要適量吃勿過量。</p>
+        </div>
+
+        <button class="accordion">吃很少才會瘦</button>
+        <div class="panel">
+            <p>每天被飢餓感包圍，會使身體的新陳代謝降低、肌肉量降低。</p>
+
+            <p> 正確的量體重時機
+                在月經週期量體重】
+                在周期時女生的身體會儲存水分，在體開始量體重時請避開這個時候。
+            </p>
+            <p>減重不下來是因為我的新陳代謝功能不良嗎?為什麼已經吃的很少但還是瘦不下來?</p>
+            <p> * 大部分有肥胖問題的人其實新陳代謝都是正常的，不正常的是他的行為，研究發現，多數肥胖者估計自己吸收的熱量，只有實際吸收的一半，她們超重的原因不在新陳代謝功能，而是攝取過高的熱量。</p>
+            <p>* 根據營養師實際評估過卡路里後發現:吃的很少的人其實卡洛里已超過他的需要, 人們常常低估了自己(錯算了卡洛里
+            </p>
+        </div>
+
+        <button class="accordion">我一週節食五天,但都瘦不下來?</button>
+        <div class="panel">
+            <p>減重需要創造熱量數字,就是消耗的熱量必須大於攝取的熱量.如果你從星期一到星期五創造熱量赤字,
+                的確是朝減重之路邁進,但如果在五天的絕食之後,緊跟著兩天的暴飲暴食,當然減重機會渺茫.天下沒有所謂半調子的減重計畫…..
+            </p>
+        </div>
+
+        <button class="accordion">立即見效的減肥方法減得較快 ?</button>
+        <div class="panel">
+            <p>肥胖不是一天造成的,所比別指望立即見效的減肥計畫,許多強調快速減肥的方法,其實都是快速排水而已, 請找出正減肥方法,才能減得健康又不易復胖…</p>
+        </div>
+
+        <button class="accordion">真的有超有效的減肥特效藥嗎?</button>
+        <div class="panel">
+            <p>每週合理減肥體重應為0.5-1kg,瘦得太快反而會產生問題, 而且藥裡可能摻了安非他命或其他不合法的成分。</p>
+        </div>
+    </div>
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+    <!-- 運動問題 -->
+    <div id="q2">
+        <h1>減肥運動常見問題</h1>
+        <button class="accordion1">運動完可以補充熱量及食物嗎？</button>
+        <div class="panel">
+            <p>如果是相當費力，或是有一定強度的運動，身體需要熱量補充，因為肌肉中儲存的肝醣大量被消耗，因此補充回去是必要的，如果沒有補充，反而會損失先前所做運動的效果，導致運動半天白做工。</p>
+            <p>運動後除了補充碳水化合物，也需要蛋白質來修補身體。如果只補充蛋白質，沒有補充澱粉，補充的蛋白質部分會被身體拿去代替澱粉產生熱量，讓蛋白質原本該有的功用損失。方便的食物，可以補充巧克力牛奶、含糖豆漿、香蕉加上蛋、即溶麥片加牛奶…。比較要提出的是：無糖豆漿中卻乏充分的碳水化合物，不利於中高強度運動的後營養補充。
+            </p>
+            <p>最後不要忘記補充水份，水分是代謝循環的基本，水分攝取不足不利脂肪代謝，會增加肝腎負擔，造成健康影響喔。</p>
+        </div>
+
+        <button class="accordion1">我該怎麼開始我的瘦身運動？</button>
+        <div class="panel">
+            <p>【瘦身＝脂肪↓＋肌肉↑】</p>
+            <p>體重/體脂超標較多者：有氧運動（快走、騎腳踏車、游泳...）</p>
+            <p>體重/體脂略高者：有氧運動70%~80%＋肌力運動20%~30%</p>
+            <p>體重/體脂標準但想讓曲線更緊實好看：肌力運動70%~80%＋有氧運動20%~30%</p>
+            <p>（此數據僅為約略值，依個人身體狀況會有所不同，可請教你的醫生或健身教練。）</p>
+        </div>
+
+        <button class="accordion1">要做什麼有氧運動？</button>
+        <div class="panel">
+            <p>喜歡到戶外或方便到健身房使用跑步機者，就選快走；喜歡在室內邊運動邊看電視，就選騎腳踏車；喜歡做豐富一點的動作，就選跳鄭多燕操（有氧加上部分肌力運動）。</p>
+            <p>請依自己的生活方式和偏好來挑選，能養成習慣最重要。</p>
+            <p>要達到最好的消脂效果，請讓心跳數保持在每分鐘130下左右，持續30分鐘以上，每週至少運動3次</p>
+            <p>每個人的心跳數依年齡和體質可能略有不同，基本上就是呼吸加快略喘，但不會到氣喘吁吁、心跳劇烈的程度。</p>
+            <p>如果希望消脂肪的速度更快，請拉長時間到每次1小時以上，或者每週運動5次以上。</p>
+        </div>
+
+        <button class="accordion1">要做什麼肌力運動？</button>
+        <div class="panel">
+            <p>依想鍛練的部位而定，臀腿可從「深蹲」開始，腹部可做仰臥起坐，手臂可用啞鈴來訓練。</p>
+        </div>
+
+        <button class="accordion1">我身上／腿上／肚子上都是肌肉所以瘦不下來，練肌肉會不會變更壯？</button>
+        <div class="panel">
+            <p>除非長期進行高強度肌力運動，否則不可能會都是肌肉，多半是長期累積了厚厚一層脂肪，而你誤以為那是肌肉，請回歸到有氧運動，先把脂肪消掉才可能瘦得健康漂亮。</p>
+        </div>
+
+        <button class="accordion1">我已經吃很少了，為什麼還是瘦不下來？</button>
+        <div class="panel">
+            <p>採用激烈的節食手段，傷身又易復胖。每天要吃進略超過基礎代謝率的熱量，才不會落入越吃越少又瘦不下來的惡性循環。</p>
+            <p>其次，「吃什麼」和「吃多少」一樣重要，與其吃得少、不如吃得巧，請務必避開潛藏高熱量的食物，並注重「營養均衡」，瘦身可以吃澱粉</p>
+            <p>除了飲食之外，運動和生活習慣同樣也很重要，多喝水、睡眠充足都是永遠不變的法則</p>
+        </div>
+
+        <button class="accordion1">我已經依照正確方式運動了，為什麼體重/體脂還是都沒有下降？</button>
+        <div class="panel">
+            <p>請認真記錄自己的飲食至少一週，檢視看看是否吃進太多熱量而不自知。瘦身關鍵在於「攝取的熱量＜消耗的熱量」，累積到7700大卡就能減去一公斤。</p>
+            <p>如果體脂下降，而體重沒動或略上升，請不用擔心，體重不是最重要的指標，檢視自己的衣服有沒有變得寬鬆、腰圍臀圍有沒有變小，才是最真實的成效。</p>
+        </div>
+
+        <button class="accordion1">動動／抖抖／搖搖機、按摩、刮痧、滾輪...能不能瘦身？</button>
+        <div class="panel">
+            <p>不能，ＸＸ機所強調的瘦身功效，多半是商人的噱頭。而後面那些方式可能可以放鬆筋骨、促進循環、幫助代謝，對身體有益，但絕對無法消除你身上的脂肪。</p>
+            <p>想想看，運動為什麼可以瘦身？因為身體要「運動」，需要「能量」。以上方式的能量來源，都不是你自己，而是「電能」或是「幫你按摩/刮痧的人」。</p>
+        </div>
+    </div>
+    <script>
+        var acc = document.getElementsByClassName("accordion1");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                } else {
+                    panel.style.display = "block";
+                }
+            });
+        }
+    </script>
+    <!-- 表單 -->
+    <div id="qdiv">
+        <button data-tf-popup="ngzaxXmK" data-tf-opacity="100" data-tf-size="100"
+            data-tf-iframe-props="title=Customer Feedback Survey" data-tf-transitive-search-params
+            data-tf-medium="snippet" style="all:unset;
+        font-family:Helvetica,Arial,sans-serif;
+        display:inline-block;max-width:100%;
+        white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+        background-color:#0a0a0a;color:#fff;font-size:20px;
+        border-radius:25px;
+        padding:0 33px;
+        font-weight:bold;
+        height:50px;
+        cursor:pointer;
+        line-height:50px;
+        text-align:center;
+        margin:0;
+        text-decoration:none;" id="qbt">
+            我想提問
+        </button>
+    </div>
+    <script src="//embed.typeform.com/next/embed.js"></script>
+    <!-- 頁尾 -->
+    <footer class="row1">
+        <div class="FtLogo column1"></div>
+        <div class="FtSocial column2">
+            <div id="demo">如果對減肥減脂有興趣的話,歡迎聯絡我們</div>
+            <br>
+            <br>
+            <br>
+            <div>聯絡信箱 abc0800.gmail.com,聯絡電話 0800-123-123</div>
+        </div>
+    </footer>
+    <!-- 回到頁首 -->
+    <a href="#myTopnav">
+        <aside></aside>
+    </a>
+
+</html>

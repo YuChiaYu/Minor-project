@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>尋找健康餐</title>
+
+</head>
+<!-- 導覽列 -->
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial
+    }
+
+    .topnav {
+        overflow: hidden;
+        background-color: rgb(2, 2, 2);
+    }
+
+    .topnav a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    .active {
+        background-color: #020202;
+        color: white;
+    }
+
+    .topnav .icon {
+        display: none;
+    }
+
+    .dropdown {
+        float: left;
+        overflow: hidden;
+    }
+
+    .dropdown .dropbtn {
+        font-size: 17px;
+        border: none;
+        outline: none;
+        color: white;
+        padding: 14px 16px;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+    .topnav a:hover,
+    .dropdown:hover .dropbtn {
+        background-color: #555;
+        color: white;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .topnav a:not(:first-child),
+        .dropdown .dropbtn {
+            display: none;
+        }
+
+        .topnav a.icon {
+            float: right;
+            display: block;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .topnav.responsive {
+            position: relative;
+        }
+
+        .topnav.responsive .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .topnav.responsive a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+
+        .topnav.responsive .dropdown {
+            float: none;
+        }
+
+        .topnav.responsive .dropdown-content {
+            position: relative;
+        }
+
+        .topnav.responsive .dropdown .dropbtn {
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+    }
+</style>
+
+<!-- 登入 -->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    .buttonA {
+        background-color: #0b0b0b;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .buttonA:hover {
+        opacity: 0.8;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        width: auto;
+        padding: 10px 18px;
+        background-color: #0b0b0b;
+    }
+
+    /* Center the image and position the close button */
+    .imgcontainer {
+        text-align: center;
+        margin: 24px 0 12px 0;
+        position: relative;
+    }
+
+    img.avatar {
+        width: 40%;
+        border-radius: 50%;
+    }
+
+    .container1 {
+        padding: 16px;
+    }
+
+    span.psw {
+        float: right;
+        padding-top: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal1 {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4);
+        /* Black w/ opacity */
+        padding-top: 60px;
+    }
+
+    /* Modal Content/Box */
+    .modal1-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 50%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button (x) */
+    .close1 {
+        position: absolute;
+        right: 25px;
+        top: 0;
+        color: #000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .close1:hover,
+    .close1:focus {
+        color: red;
+        cursor: pointer;
+    }
+
+    /* Add Zoom Animation */
+    .animate1 {
+        -webkit-animation: animatezoom 0.6s;
+        animation: animatezoom 0.6s
+    }
+
+    @-webkit-keyframes animatezoom {
+        from {
+            -webkit-transform: scale(0)
+        }
+
+        to {
+            -webkit-transform: scale(1)
+        }
+    }
+
+    @keyframes animatezoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+        span.psw {
+            display: block;
+            float: none;
+        }
+
+        .cancelbtn1 {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .modal1-content {
+            width: 80%;
+        }
+    }
+</style>
+
+<!-- 註冊 -->
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Full-width input fields */
+    input[type=text],
+    input[type=password] {
+        width: 100%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        display: inline-block;
+        border: none;
+        background: #f1f1f1;
+    }
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus,
+    input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+    /* Set a style for all buttons */
+    .buttonB {
+        background-color: #030303;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        border: 2px solid white;
+    }
+
+    .buttonB:hover {
+        opacity: 1;
+    }
+
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+        padding: 14px 20px;
+        background-color: #080808;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .cancelbtn,
+    .signupbtn {
+        float: left;
+        width: 50%;
+    }
+
+    /* Add padding to container elements */
+    .container {
+        padding: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 1;
+        /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 50px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto 15% auto;
+        /* 5% from the top, 15% from the bottom and centered */
+        border: 1px solid #888;
+        width: 50%;
+        /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+        border: 1px solid #f1f1f1;
+        margin-bottom: 25px;
+    }
+
+    /* The Close Button (x) */
+    .close2 {
+        position: absolute;
+        right: 35px;
+        top: 15px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #fcfbfb;
+    }
+
+
+
+    .close2:hover,
+    .close2:focus {
+        color: #f44336;
+        cursor: pointer;
+    }
+
+    /* Clear floats */
+    .clearfix::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+
+        .cancelbtn,
+        .signupbtn {
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .modal-content {
+            width: 80%;
+        }
+    }
+</style>
+
+
+
+<!-- 頁尾 -->
+<style>
+    footer {
+        width: 100%;
+        height: 300px;
+        background-color: rgb(11, 11, 11);
+        margin-top: 120px;
+        display: flex;
+        position: relative;
+        padding: 20px 0px 20px 50px;
+    }
+
+    .FtLogo {
+        flex: 3;
+        background-image: url(./imge/qrcode_localhost.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin: 50px 10px;
+        padding: 10px;
+        height: 200px;
+        width: 200px;
+
+    }
+
+    .FtSocial {
+        flex: 9;
+        background-color: rgb(249, 248, 247);
+        height: 200px;
+        margin-top: 50px;
+        margin-right: 20px;
+        text-align: center;
+        border-radius: 5px;
+        padding: 50px;
+    }
+
+
+    #demo {
+        margin-top: 20px;
+        margin-left: 300px;
+        font-size: 20px;
+        width: 40em;
+        height: 1.25em;
+        border-right: 1px solid transparent;
+        animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+        font-family: Consolas, Monaco;
+        word-break: break-all;
+        overflow: hidden;
+    }
+
+    /* 列印效果 */
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 20em;
+        }
+    }
+
+    /* 游標閃啊閃 */
+    @keyframes blink-caret {
+
+        from,
+        to {
+            border-color: transparent;
+        }
+
+        50% {
+            border-color: currentColor;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .FtSocial {
+            text-align: center;
+            width: 100%;
+        }
+
+        .FtLogo {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 900px) {
+        .FtSocial {
+            text-align: center;
+            width: 100%;
+        }
+
+        .FtLogo {
+            display: none;
+        }
+
+        #demo {
+            margin-top: 40px;
+            margin-left: 10px;
+            font-size: 15px;
+        }
+    }
+</style>
+<!-- 介紹飲食法導覽區 -->
+<style>
+    :root {
+        --background-dark: #2d3548;
+        --text-light: rgba(255, 255, 255, 0.6);
+        --text-lighter: rgba(255, 255, 255, 0.9);
+        --spacing-s: 8px;
+        --spacing-m: 16px;
+        --spacing-l: 24px;
+        --spacing-xl: 32px;
+        --spacing-xxl: 64px;
+        --width-container: 1200px;
+    }
+
+    * {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        height: 100%;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 14px;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    .hero-section {
+        align-items: flex-start;
+        /* background-image: linear-gradient(15deg, #0f4667 0%, #2a6973 150%); */
+        display: flex;
+        min-height: 100%;
+        justify-content: center;
+        padding: var(--spacing-xxl) var(--spacing-l);
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-column-gap: var(--spacing-l);
+        grid-row-gap: var(--spacing-l);
+        max-width: var(--width-container);
+        width: 100%;
+    }
+
+    @media(min-width: 540px) {
+        .card-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media(min-width: 960px) {
+        .card-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .card {
+        list-style: none;
+        position: relative;
+    }
+
+    .card:before {
+        content: '';
+        display: block;
+        padding-bottom: 150%;
+        width: 100%;
+    }
+
+    .card__background {
+        background-size: cover;
+        background-position: center;
+        border-radius: var(--spacing-l);
+        bottom: 0;
+        filter: brightness(0.75) saturate(1.2) contrast(0.85);
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform-origin: center;
+        trsnsform: scale(1) translateZ(0);
+        transition:
+            filter 200ms linear,
+            transform 200ms linear;
+    }
+
+    .card:hover .card__background {
+        transform: scale(1.05) translateZ(0);
+    }
+
+    .card-grid:hover>.card:not(:hover) .card__background {
+        filter: brightness(0.5) saturate(0) contrast(1.2) blur(20px);
+    }
+
+    .card__content {
+        left: 0;
+        padding: var(--spacing-l);
+        position: absolute;
+        top: 0;
+    }
+
+    .card__category {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-s);
+        text-transform: uppercase;
+    }
+
+    .card__heading {
+        color: var(--text-lighter);
+        font-size: 1.9rem;
+        text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+        line-height: 1.4;
+        word-spacing: 100vw;
+    }
+</style>
+<!-- 飲食介紹區 -->
+<style>
+    #food {
+        /* background-color: #2a6973; */
+        width: 100%;
+        margin-top: 70px;
+    }
+
+    #food1,
+    #food2,
+    #food3,
+    #food4 {
+        display: none;
+    }
+
+    h1 {
+        font-size: 50px;
+        margin-button: -40px;
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    .row {
+        padding: 50px;
+    }
+
+    .column1 {
+        float: left;
+        width: 70%;
+        padding: 5px;
+    }
+
+    .column2 {
+        float: left;
+        width: 30%;
+        padding: 5px;
+    }
+
+    /* Clearfix (clear floats) */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
+
+    @media screen and (max-width: 600px) {
+
+        .column1,
+        .column2 {
+            width: 100%;
+        }
+    }
+</style>
+<!-- 定位尋找健康餐盒 -->
+<style>
+    #gym {
+        width: 100%;
+        padding: 50px 150px;
+    }
+
+    #map {
+        height: 400px;
+        width: 100%;
+        height: 500px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #gym {
+            padding: 0;
+            margin-top: 30px;
+        }
+    }
+</style>
+
+<!-- 回到頁首 -->
+<style>
+    aside {
+        width: 100px;
+        height: 100px;
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+        background-image: url(./imge/往上箭頭.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: transparent;
+    }
+</style>
+
+<body>
+
+
+
+    <!-- 導覽列 -->
+    <div class="topnav" id="myTopnav">
+        <a href="./index6.html" class="active">首頁</a>
+        <a href="#home" class="active" onclick="document.getElementById('id01').style.display='block'">登入</a>
+        <a href="#home" class="active" onclick="document.getElementById('id02').style.display='block'">註冊</a>
+        <div class="dropdown">
+            <button class="dropbtn">計算機
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="./cul6.html">計算身體各項指數</a>
+                <a href="./cal6.html">卡路里計算機</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">尋找場所
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="./gym6.html">附近健身房</a>
+                <a href="./food6.html">健康餐點</a>
+            </div>
+        </div>
+        <a href="./question6.html">常見問題</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+    <!-- 登入 -->
+    <div id="id01" class="modal1">
+
+        <form class="modal1-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close1"
+                    title="Close Modal">&times;</span>
+            </div>
+
+            <div class="container1">
+                <label for="uname"><b>信箱</b></label>
+                <input type="text" placeholder="請輸入信箱" name="uname" required>
+
+                <label for="psw"><b>密碼</b></label>
+                <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+                <button type="submit" class="buttonA">登入</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> 記住帳號
+                </label>
+            </div>
+
+            <div class="container1" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn1 buttonA">取消</button>
+                <span class="psw"><a href="#">忘記密碼</a></span>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            }
+        }
+    </script>
+    <!-- 註冊 -->
+    <div id="id02" class="modal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close2"
+            title="Close Modal">&times;</span>
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <label for="email"><b>信箱</b></label>
+                <input type="text" placeholder="請輸入信箱" name="email" required>
+
+                <label for="psw"><b>密碼</b></label>
+                <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+                <label for="psw-repeat"><b>確認密碼</b></label>
+                <input type="password" placeholder="請再次輸入密碼" name="psw-repeat" required>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">記住帳號
+                </label>
+
+                <p>請先閱讀<a href="#" style="color:dodgerblue">使用者條款</a>.</p>
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                        class="cancelbtn buttonB">取消</button>
+                    <button type="submit" class="signupbtn buttonB">註冊</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id02');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+    <br><br><br>
+    <!-- 介紹飲食法導覽區 -->
+    <div class="container2">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+        <section class="hero-section">
+            <div class="card-grid">
+                <a class="card" href="#food1">
+                    <div class="card__background" id="fp1" style="background-image: url(./imge/001.jpeg)">
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__heading">間歇性斷食</h3>
+                        <p class="card__category">選擇優質蛋白質、油脂</p>
+                    </div>
+                </a>
+                <a class="card" href="#food2">
+                    <div class="card__background" id="fp2" style="background-image: url(./imge/002.jpeg)">
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__heading">減醣飲食</h3>
+                        <p class="card__category">戒掉含有高糖份的甜點零食、含糖飲料，以及麵、飯、麵包等澱粉類。</p>
+                    </div>
+                </a>
+                <a class="card" href="#food3">
+                    <div class="card__background" id="fp3" style="background-image: url(./imge/003.webp)">
+                    </div>
+                    <div class="card__content">
+                        <h3 class="card__heading">蛋白質飲食</h3>
+                        <p class="card__category">避免減肥期間過度控制熱量攝取，導致身體肌肉量減少、基礎代謝率下降</p>
+                    </div>
+                    </li>
+                    <a class="card" href="#food4">
+                        <div class="card__background" id="fp4" style="background-image: url(./imge/004.webp)">
+                        </div>
+                        <div class="card__content">
+                            <h3 class="card__heading">生酮飲食</h3>
+                            <p class="card__category">一天攝取5%碳水化合物、20%蛋白質，和75%脂肪。</p>
+                        </div>
+                    </a>
+                    <div>
+        </section>
+
+    </div>
+    <!-- 飲食介紹區 -->
+    <div id="food">
+        <div id="food1" class="row">
+            <h1>168間歇性斷食</h1>
+            <h3 class="column1">
+                168斷食的進行是以一天為單位，「16」指的是連續16小時不吃東西，「8」則是在8小時內進食一天所需的熱量。<br><br>
+                雖然在8小時內可以自由選擇想吃的食物，但營養師還是建議選擇「營養豐富的食物，例如穀物、蔬菜、瘦肉、雞蛋，以及橄欖油、酪梨等等」，在不攝取過多熱量的前提下，盡可能補充纖維質、蛋白質及健康油脂。168斷食的進行是以一天為單位，「16」指的是連續16小時不吃東西，「8」則是在8小時內進食一天所需的熱量。<br><br>
+                間歇性斷食的時間建議可以省略早餐，在13:00-17:00內進食，或是在8:00-14:00內進食，不吃晚餐。168斷食的進行是以一天為單位，「16」指的是連續16小時不吃東西，「8」則是在8小時內進食一天所需的熱量。<br><br>
+                適合168斷食的人：生活作息規律、有毅力的人<br><br>
+            </h3>
+            <div class="column2">
+                <div style="background-color: white;
+                border: #2d3548 2px solid;
+                border-radius: 10px;
+                margin-left: 20px;
+                padding: 10px;
+                font-size: 20px;">
+                    168斷食其實不容易，除了進食時間縮短外，想快速達到目標體重的話，選擇的飲食也要斤斤計較。<br><br>
+                    像是楊丞琳就曾分享自己的食譜是一天兩餐，第一餐以番薯替代澱粉，搭配無加油烹煮的雞肉、牛排以及蔬菜。<br><br>
+                    第二餐則是只喝高蛋白粉加無糖豆漿。<br><br>
+                    如果覺得168斷食實在太困難，不妨從較溫和的1212斷食，也就是晚餐和隔天早餐間隔12小時開始嘗試！<br><br>
+                </div>
+            </div>
+        </div>
+        <div id="food2" class="row">
+            <h1>減醣飲食</h1>
+            <h3 class="column1">
+                減醣飲食也是減肥界近年的熱門話題，執行的重點就是減少或戒掉含有高糖份的甜點零食、含糖飲料，以及麵、飯、麵包等澱粉類。<br><br>
+                除此之外不須特別忌口，每餐可以盡情吃到飽。減醣飲食法不用控制熱量或減少鹽分攝取，若攝取的熱量過少，反而會因為減掉肌肉量導致基礎代謝降低等問題，進而加速復胖。<br><br>
+                適合減醣飲食的人：食量大、無法節食的人<br><br>
+            </h3>
+            <div class="column2">
+                <div style="background-color: white;
+                border: #2d3548 2px solid;
+                border-radius: 10px;
+                margin-left: 20px;
+                padding: 10px;
+                font-size: 20px;">
+                    想要執行減醣飲食的人，可以挑戰一星期六天不喝含糖飲料、不攝取甜品和澱粉質，以深綠色蔬菜為主要飲食，雞蛋、富含油脂的魚肉等優質蛋白質也可以多吃。<br><br>
+                    豆類、堅果及糖份高的香蕉、葡萄等盡量少吃，並將每日的碳水化合物攝取量維持在20-50g。剩下的一天當作破戒日，只要不要空腹吃碳水化合物，可以選擇愛吃的食物犒賞自己！<br><br>
+                </div>
+            </div>
+        </div>
+        <div id="food3" class="row">
+            <h1>蛋白質飲食</h1>
+            <h3 class="column1">
+                蛋白質飲食就是以含有優質、大量的蛋白質為主食，依照個人需求安排一天中哪幾餐只能吃蛋白質，再搭配簡單運動。<br><br>
+                目的是避免減肥期間過度控制熱量攝取，導致身體肌肉量減少、基礎代謝率下降，進而影響體力與精神。<br><br>
+                這個方法也能讓減肥的人不用再忍耐飢餓感，可以吃飽又成功瘦身。<br><br>
+                適合蛋白質飲食的人：想增肌減脂、瘦身又練出線條的人<br><br>
+            </h3>
+            <div class="column2">
+                <div style="background-color: white;
+                border: #2d3548 2px solid;
+                border-radius: 10px;
+                margin-left: 20px;
+                padding: 10px;
+                font-size: 20px;">
+                    有許多高蛋白質的食物都是減肥人的好朋友，像是雞蛋、毛豆等，都是健康、含有豐富蛋白質，又能增加飽足感的好物。<br><br>
+                    肉類方面則可以選擇雞柳、豬里肌等油脂含量較低的肉品，搭配豆漿等高蛋白飲品。<br><br>
+                </div>
+            </div>
+        </div>
+        <div id="food4" class="row">
+            <h1>生酮飲食</h1>
+            <h3 class="column1">
+                標準的「生酮飲食」百分比，是一天攝取5%碳水化合物、20%蛋白質，和75%脂肪。<br><br>
+                透過攝取高脂肪、極低碳水化合物及適量蛋白質的飲食模式，強迫人體燃燒脂肪，模擬「飢餓狀態」迫使身體產生「酮體」，取代葡萄糖成為能量來源達到減脂效果。<br><br>
+                生酮飲食短期能達到顯著效果，若長時間實施可能有頭暈、疲倦等負面影響。<br><br>
+                適合生酮飲食的人：想在短時間內瘦到目標體重的人、無心血管疾病的人<br><br>
+            </h3>
+            <div class="column2">
+                <div style="background-color: white;
+                border: #2d3548 2px solid;
+                border-radius: 10px;
+                margin-left: 20px;
+                padding: 10px;
+                font-size: 20px;">
+                    生酮飲食強調「極低碳水化合物」攝取，幾乎得避免所有可消化性碳水化合物，因此限制了許多食物，例如如：飯麵、水果，甚至連含有乳糖的牛奶都必須遠離。<br><br>
+                    盡量選擇含有大量優質脂肪的食物，例如：酪梨、椰子、堅果、鮭魚、橄欖油等等，都很適合正在執行生酮飲食的人。<br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("fp1").onclick = function () {
+            document.getElementById("food1").style.display = "block"
+
+            document.getElementById("food2").style.display = "none"
+            document.getElementById("food3").style.display = "none"
+            document.getElementById("food4").style.display = "none"
+        }
+        document.getElementById("fp2").onclick = function () {
+            document.getElementById("food2").style.display = "block"
+
+            document.getElementById("food1").style.display = "none"
+            document.getElementById("food3").style.display = "none"
+            document.getElementById("food4").style.display = "none"
+        }
+        document.getElementById("fp3").onclick = function () {
+            document.getElementById("food3").style.display = "block"
+
+            document.getElementById("food1").style.display = "none"
+            document.getElementById("food2").style.display = "none"
+            document.getElementById("food4").style.display = "none"
+        }
+        document.getElementById("fp4").onclick = function () {
+            document.getElementById("food4").style.display = "block"
+
+            document.getElementById("food1").style.display = "none"
+            document.getElementById("food2").style.display = "none"
+            document.getElementById("food3").style.display = "none"
+        }
+    </script>
+    <!-- 定位尋找健康餐盒 -->
+    <h1 style="margin-left: 50px;margin-top: 100px;">定位尋找健康餐盒</h1>
+    <div id="gym">
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+    <script>
+        // 抓取json資料 分析出來
+        function Location(name, vicinity, lat, lng) {
+            this.name = name
+            this.vicinity = vicinity
+            this.lat = lat
+            this.lng = lng
+            this.title = name
+            this.center = { lat: parseFloat(lat), lng: parseFloat(lng) }
+
+        }
+
+        window.onload = function () {
+            fetch("./Food.php")
+                .then(function (response) {
+                    return response.json()
+                })
+
+                .then(function (jsonObj) {
+                    let results = []
+                    jsonObj["results"].forEach(function (rd) {
+                        results.push(new Location(rd.name, rd.vicinity, rd.geometry.location.lat, rd.geometry.location.lng))
+                    })
+                    console.log(results)
+                    pinMarkersCluster(results)
+                })
+
+
+                function pinMarkersCluster(results) {
+                let markers = []
+                for (let i = 0; i < results.length; i++) {
+                    marker = new google.maps.Marker({
+                        position: results[i].center,
+                        title: results[i].name,
+                        map: map,
+                        label: results.aqi
+                    })
+                    markers.push(marker)
+
+                    infowindow = new google.maps.InfoWindow({
+                        content: results[i].name
+                    })
+                    openw(marker)
+                }
+                new markerClusterer.MarkerClusterer({ markers, map })
+            }
+            // 監聽標籤按下事件
+            function openw(marker) {
+                infowindow.close()
+                marker.addListener("click", function () {
+                    infowindow.close()
+                    infowindow = new google.maps.InfoWindow({
+                        content: marker.getTitle()
+                    })
+                    infowindow.open({
+                        anchor: marker,
+                        map
+                    })
+                })
+            }
+        }
+    </script>
+    <script>
+
+        let map;
+
+        // 設置定位按鈕
+        function mapCenterControl(map, clickButton) {
+            let centerControlDiv = document.createElement('div');
+
+            // Set CSS for the control border.
+            let controlUI = document.createElement('button');
+            controlUI.style.backgroundColor = '#fff';
+            controlUI.style.border = 'none';
+            controlUI.style.outline = 'none';
+            controlUI.style.width = '40px';
+            controlUI.style.height = '40px';
+            controlUI.style.borderRadius = '2px';
+            controlUI.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.marginRight = '10px';
+            controlUI.style.padding = '0';
+            controlUI.title = 'Your Location';
+            centerControlDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior.
+            let controlText = document.createElement('div');
+            controlText.style.margin = '10px';
+            controlText.style.width = '30px';
+            controlText.style.height = '30px';
+            controlText.style.backgroundImage = "url('imge/gpsicon.png')";
+            controlText.style.backgroundSize = '20px 20px';
+            controlText.style.backgroundPosition = '0px 0px';
+            controlText.style.backgroundRepeat = 'no-repeat';
+            controlUI.appendChild(controlText);
+
+            // constructor passing in this DIV.
+            centerControlDiv.index = 1; // 排列優先度
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv); // 設定按鈕加入地圖的位置
+
+            // Setup the click event listeners.
+            controlUI.addEventListener('click', () => clickButton());
+        }
+
+
+        // 取得使用者位置
+        function gettingPosition() {
+            if (navigator.geolocation) {
+                return new Promise((resolve, reject) => {
+                    let option = {
+                        enableAcuracy: false, // 提高精確度
+                        maximumAge: 0, // 設定上一次位置資訊的有效期限(毫秒)
+                        timeout: 10000 // 逾時計時器(毫秒)
+                    };
+                    navigator.geolocation.getCurrentPosition(resolve, reject, option);
+                })
+            } else {
+                alert("Does not support positioning!");
+            }
+        }
+        function successCallback(position) {
+            map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
+
+            new google.maps.Marker({
+                map: map,
+                position: { lat: position.coords.latitude, lng: position.coords.longitude },
+                icon: {
+                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                },
+                zoom:30
+            });
+        }
+        function errorCallback(error) {
+            alert(error.message); //error.code
+        }
+
+        //預設位置台中火車站
+        function initMap() {
+            const myLatlng = { lat: 24.13755235118858, lng: 120.68699483743649 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: myLatlng,
+                // center: { lat: 24.13755235118858, lng: 120.68699483743649 }
+                // center: { lat: 24.152969, lng: 120.6664315 }
+            });
+            mapCenterControl(map,
+                () => gettingPosition()
+                    .then(position => successCallback(position))
+                    .catch(error => errorCallback(error))
+            )
+            // // 設定標籤
+
+            let infoWindow = new google.maps.InfoWindow({
+                content: "點選取得店名",
+                position: myLatlng,
+            });
+
+            infoWindow.open(map);
+            // Configure the click listener.
+            
+
+        }
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxplkQQN1mTOSfOn0ww_0v1UAHRKH05cU&callback=initMap&v=weekly"
+        defer></script>
+    <!-- 頁尾 -->
+    <footer>
+        <div class="FtLogo"></div>
+        <div class="FtSocial">
+            <div id="demo">如果對減肥減脂有興趣的話,歡迎聯絡我們</div>
+            <br>
+            <br>
+            <br>
+            <div>聯絡信箱 abc0800.gmail.com,聯絡電話 0800-123-123</div>
+        </div>
+    </footer>
+    <!-- 返回側邊 -->
+    <!-- 回到頁首 -->
+    <a href="#myTopnav">
+        <aside></aside>
+    </a>
+</body>
+
+</html>

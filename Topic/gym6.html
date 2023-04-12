@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>尋找健身房</title>
+
+    <!-- 導覽列 -->
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: rgb(2, 2, 2);
+        }
+
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .active {
+            background-color: #020202;
+            color: white;
+        }
+
+        .topnav .icon {
+            display: none;
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 17px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .topnav a:hover,
+        .dropdown:hover .dropbtn {
+            background-color: #555;
+            color: white;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        @media screen and (max-width: 600px) {
+
+            .topnav a:not(:first-child),
+            .dropdown .dropbtn {
+                display: none;
+            }
+
+            .topnav a.icon {
+                float: right;
+                display: block;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .topnav.responsive {
+                position: relative;
+            }
+
+            .topnav.responsive .icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .topnav.responsive a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+
+            .topnav.responsive .dropdown {
+                float: none;
+            }
+
+            .topnav.responsive .dropdown-content {
+                position: relative;
+            }
+
+            .topnav.responsive .dropdown .dropbtn {
+                display: block;
+                width: 100%;
+                text-align: left;
+            }
+        }
+    </style>
+
+    <!-- 登入 -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Full-width input fields */
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        /* Set a style for all buttons */
+        .buttonA {
+            background-color: #0b0b0b;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .buttonA:hover {
+            opacity: 0.8;
+        }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            width: auto;
+            padding: 10px 18px;
+            background-color: #0b0b0b;
+        }
+
+        /* Center the image and position the close button */
+        .imgcontainer {
+            text-align: center;
+            margin: 24px 0 12px 0;
+            position: relative;
+        }
+
+        img.avatar {
+            width: 40%;
+            border-radius: 50%;
+        }
+
+        .container1 {
+            padding: 16px;
+        }
+
+        span.psw {
+            float: right;
+            padding-top: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal1 {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgb(0, 0, 0);
+            /* Fallback color */
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        /* Modal Content/Box */
+        .modal1-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 50%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button (x) */
+        .close1 {
+            position: absolute;
+            right: 25px;
+            top: 0;
+            color: #000;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        .close1:hover,
+        .close1:focus {
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Add Zoom Animation */
+        .animate1 {
+            -webkit-animation: animatezoom 0.6s;
+            animation: animatezoom 0.6s
+        }
+
+        @-webkit-keyframes animatezoom {
+            from {
+                -webkit-transform: scale(0)
+            }
+
+            to {
+                -webkit-transform: scale(1)
+            }
+        }
+
+        @keyframes animatezoom {
+            from {
+                transform: scale(0)
+            }
+
+            to {
+                transform: scale(1)
+            }
+        }
+
+        /* Change styles for span and cancel button on extra small screens */
+        @media screen and (max-width: 300px) {
+            span.psw {
+                display: block;
+                float: none;
+            }
+
+            .cancelbtn1 {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .modal1-content {
+                width: 80%;
+            }
+        }
+    </style>
+
+    <!-- 註冊 -->
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Full-width input fields */
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+        /* Add a background color when the inputs get focus */
+        input[type=text]:focus,
+        input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        /* Set a style for all buttons */
+        .buttonB {
+            background-color: #030303;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+            border: 2px solid white;
+        }
+
+        .buttonB:hover {
+            opacity: 1;
+        }
+
+        /* Extra styles for the cancel button */
+        .cancelbtn {
+            padding: 14px 20px;
+            background-color: #080808;
+        }
+
+        /* Float cancel and signup buttons and add an equal width */
+        .cancelbtn,
+        .signupbtn {
+            float: left;
+            width: 50%;
+        }
+
+        /* Add padding to container elements */
+        .container {
+            padding: 16px;
+        }
+
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            /* Stay in place */
+            z-index: 1;
+            /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%;
+            /* Full width */
+            height: 100%;
+            /* Full height */
+            overflow: auto;
+            /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 50px;
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto 15% auto;
+            /* 5% from the top, 15% from the bottom and centered */
+            border: 1px solid #888;
+            width: 50%;
+            /* Could be more or less, depending on screen size */
+        }
+
+        /* Style the horizontal ruler */
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        /* The Close Button (x) */
+        .close2 {
+            position: absolute;
+            right: 35px;
+            top: 15px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #fcfbfb;
+        }
+
+
+
+        .close2:hover,
+        .close2:focus {
+            color: #f44336;
+            cursor: pointer;
+        }
+
+        /* Clear floats */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Change styles for cancel button and signup button on extra small screens */
+        @media screen and (max-width: 300px) {
+
+            .cancelbtn,
+            .signupbtn {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .modal-content {
+                width: 80%;
+            }
+        }
+    </style>
+
+    <!-- 頁尾 -->
+    <style>
+        footer {
+            width: 100%;
+            height: 300px;
+            background-color: rgb(11, 11, 11);
+            margin-top: 120px;
+            display: flex;
+            position: relative;
+            padding: 20px 0px 20px 50px;
+            /* border-radius: 10px; */
+        }
+
+        .FtLogo {
+            flex: 3;
+            background-image: url(./imge/qrcode_localhost.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 50px 10px;
+            padding: 10px;
+            height: 200px;
+            width: 200px;
+
+        }
+
+        .FtSocial {
+            flex: 9;
+            background-color: rgb(249, 248, 247);
+            height: 200px;
+            margin: 45px;
+            margin-left: -20px;
+            text-align: center;
+            border-radius: 5px;
+            padding: 50px;
+        }
+
+
+        #demo {
+            margin-top: 20px;
+            margin-left: 300px;
+            font-size: 20px;
+            width: 40em;
+            height: 1.25em;
+            border-right: 1px solid transparent;
+            animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+            font-family: Consolas, Monaco;
+            word-break: break-all;
+            overflow: hidden;
+        }
+
+        /* 列印效果 */
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 20em;
+            }
+        }
+
+        /* 游標閃啊閃 */
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent;
+            }
+
+            50% {
+                border-color: currentColor;
+            }
+        }
+    </style>
+    <style>
+        .row1 {
+            width: 100%;
+            height: 270px;
+        }
+
+        .column1 {
+            float: left;
+            width: 10%;
+            padding: 0 10px;
+            margin-top: 20px;
+        }
+
+        .column2 {
+            float: left;
+            width: 90%;
+            padding: 0 10px;
+            margin-top: 20px;
+        }
+
+        @media screen and (max-width: 600px) {
+            .FtSocial {
+                text-align: center;
+                width: 100%;
+            }
+
+            .FtLogo {
+                display: none;
+            }
+
+            #demo {
+                margin-top: 20px;
+                margin-left: 300px;
+                font-size: 20px;
+                width: 40em;
+                height: 1.25em;
+                border-right: 1px solid transparent;
+                animation: typing 8s steps(30, end) infinite, blink-caret .30s step-end infinite;
+                font-family: Consolas, Monaco;
+                word-break: break-all;
+                overflow: hidden;
+
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+            .FtSocial {
+                text-align: center;
+                width: 100%;
+            }
+
+            .FtLogo {
+                display: none;
+            }
+
+            #demo {
+                margin-top: 40px;
+                margin-left: 10px;
+                font-size: 18px;
+            }
+        }
+    </style>
+    <!-- 宣傳圖 -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Position the image container (needed to position the left and right arrows) */
+        .container2 {
+            position: relative;
+        }
+
+        /* Hide the images by default */
+        .mySlides {
+            display: none;
+
+        }
+
+        /* Add a pointer when hovering over the thumbnail images */
+        .cursor {
+            cursor: pointer;
+        }
+
+        /* Next & previous buttons */
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 40%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Number text (1/3 etc) */
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Container for image text */
+        .caption-container {
+            text-align: center;
+            background-color: #222;
+            padding: 2px 16px;
+            color: white;
+        }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Six columns side by side */
+        .column {
+            float: left;
+            width: 16.66%;
+        }
+
+        /* Add a transparency effect for thumnbail images */
+        .demo {
+            opacity: 0.6;
+        }
+
+        .active,
+        .demo:hover {
+            opacity: 1;
+        }
+    </style>
+    <!-- 找健身房 -->
+    <style>
+        #gym {
+            width: 100%;
+            padding: 50px 150px;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            height: 500px;
+        }
+
+        @media screen and (max-width: 800px) {
+            #gym {
+                padding: 0;
+                margin-top: 30px;
+            }
+        }
+    </style>
+
+    <!-- 整頁式標籤 -->
+    <style>
+        /* Set height of body and the document to 100% to enable "full page tabs" */
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+        }
+
+        /* Style tab links */
+        .tablink {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            font-size: 17px;
+            width: 25%;
+        }
+
+        .tablink:hover {
+            background-color: #777;
+        }
+
+        /* Style the tab content (and add height:100% for full page content) */
+        .tabcontent {
+            color: black;
+            display: none;
+            padding: 100px 20px;
+            height: 100%;
+            border: #222 2px solid;
+        }
+
+        #Home {
+            background-color: white;
+        }
+
+        #News {
+            background-color: white;
+        }
+
+        #Contact {
+            background-color: white;
+        }
+
+        #About {
+            background-color: white;
+        }
+
+        #page {
+            margin-top: 60px;
+            margin-bottom: 100px;
+            padding: 0 130px 0 130px;
+        }
+
+        table {
+            border: #222 2px solid;
+            font-size: 15px;
+        }
+
+        td {
+            border: #222 1px solid;
+            height: 30px;
+            width: 200px;
+        }
+
+        @media screen and (max-width: 800px) {
+            #page {
+                margin-top: 60px;
+                margin-bottom: 100px;
+                padding: 0;
+            }
+        }
+
+        .bt {
+            color: #f2f2f2;
+            background-color: rgb(40, 3, 5);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- 回到頁首 -->
+    <style>
+        aside {
+            width: 100px;
+            height: 100px;
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            background-image: url(./imge/往上箭頭.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: transparent;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <!-- 導覽列 -->
+    <div class="topnav" id="myTopnav">
+        <a href="./index6.html" class="active">首頁</a>
+        <a href="#home" class="active" onclick="document.getElementById('id01').style.display='block'">登入</a>
+        <a href="#home" class="active" onclick="document.getElementById('id02').style.display='block'">註冊</a>
+        <div class="dropdown">
+            <button class="dropbtn">計算機
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="./cul6.html">計算身體各項指數</a>
+                <a href="./cal6.html">卡路里計算機</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">尋找場所
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="./gym6.html">附近健身房</a>
+                <a href="./food6.html">健康餐點</a>
+            </div>
+        </div>
+        <a href="./question6.html">常見問題</a>
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+    </script>
+    <!-- 登入 -->
+    <div id="id01" class="modal1">
+
+        <form class="modal1-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close1"
+                    title="Close Modal">&times;</span>
+            </div>
+
+            <div class="container1">
+                <label for="uname"><b>信箱</b></label>
+                <input type="text" placeholder="請輸入信箱" name="uname" required>
+
+                <label for="psw"><b>密碼</b></label>
+                <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+                <button type="submit" class="buttonA">登入</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> 記住帳號
+                </label>
+            </div>
+
+            <div class="container1" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn1 buttonA">取消</button>
+                <span class="psw"><a href="#">忘記密碼</a></span>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal1) {
+                modal1.style.display = "none";
+            }
+        }
+    </script>
+    <!-- 註冊 -->
+    <div id="id02" class="modal">
+        <span onclick="document.getElementById('id02').style.display='none'" class="close2"
+            title="Close Modal">&times;</span>
+        <form class="modal-content" action="/action_page.php">
+            <div class="container">
+                <label for="email"><b>信箱</b></label>
+                <input type="text" placeholder="請輸入信箱" name="email" required>
+
+                <label for="psw"><b>密碼</b></label>
+                <input type="password" placeholder="請輸入密碼" name="psw" required>
+
+                <label for="psw-repeat"><b>確認密碼</b></label>
+                <input type="password" placeholder="請再次輸入密碼" name="psw-repeat" required>
+
+                <label>
+                    <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">記住帳號
+                </label>
+
+                <p>請先閱讀<a href="#" style="color:dodgerblue">使用者條款</a>.</p>
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'"
+                        class="cancelbtn buttonB">取消</button>
+                    <button type="submit" class="signupbtn buttonB">註冊</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById('id02');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    <!-- 宣傳圖 -->
+    <div class="container2">
+
+        <!-- Full-width images with number text -->
+        <div class="mySlides">
+            <div class="numbertext"></div>
+            <img src="./imge/111.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext"></div>
+            <img src="imge/222.jpg" " style=" width:100%">
+        </div>
+
+        <div class="mySlides">
+            <div class="numbertext"></div>
+            <img src="./imge/333.jpg" style="width:100%">
+        </div>
+
+
+
+        <!-- Next and previous buttons -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        <!-- Image text -->
+        <div class="caption-container">
+            <p id="caption"></p>
+        </div>
+
+        <!-- Thumbnail images -->
+        <div class="row">
+            <div class="column" style="width: 33.3%;">
+                <img class="demo cursor" src="./imge/111.jpg" style=" width:100%" onclick="currentSlide(1)"
+                    alt="啟動健身中心">
+            </div>
+            <div class="column" style="width: 33.3%;">
+                <img class="demo cursor" src="./imge/222.jpg" style="width:100%" onclick="currentSlide(2)" alt="力宴健身房">
+            </div>
+            <div class="column" style="width: 33.3%;">
+                <img class="demo cursor" src="./imge/333.jpg" style="width:100%" onclick="currentSlide(3)" alt="悍草訓練">
+            </div>
+
+        </div>
+    </div>
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        // Next/previous controls
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        // Thumbnail image controls
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("demo");
+            let captionText = document.getElementById("caption");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+    </script>
+
+    <!-- 整頁式標籤 -->
+    <div id="page">
+        <h1>健身房分類</h1>
+        <button class="tablink" onclick="openPage('Home', this, 'gray')">計次收費</button>
+        <button class="tablink" onclick="openPage('News', this, 'gray')" id="defaultOpen">計時收費</button>
+        <button class="tablink" onclick="openPage('Contact', this, 'gray')">女性專區</button>
+        <button class="tablink" onclick="openPage('About', this, 'gray')">訓練菜單</button>
+
+        <div id="Home" class="tabcontent">
+            <h2>哪間為計次收費？</h2>
+            <div>
+                <table>
+                    <tr>
+                        <th>名稱</th>
+                        <th>價錢</th>
+                        <th>營業時間</th>
+                        <th>環境</th>
+                        <th>連結</th>
+                    </tr>
+                    <tr>
+                        <td>悍草訓練</td>
+                        <td>單次入場：$300<br>
+                            不綁約訂閱制：$825/月<br>
+                            一年約：$9,900
+                        </td>
+                        <td>
+                            週一至週六 07:00-00:00<br>
+                            週日 10:00-19:00
+                        </td>
+                        <td>
+                            擁有人臉辨識系統置物櫃<br>
+                            友善的女性優先專區<br>
+                        </td>
+                        <td align="center" valign="center">
+                            <button class="bt"
+                                onclick="location.href='https://www.google.com/maps/place/%E6%82%8D%E8%8D%89%E8%A8%93%E7%B7%B4+HANDS+UP+TRAINING+%E8%A5%BF%E5%8D%80%E5%96%AE%E6%AC%A1%E5%81%A5%E8%BA%AB%E6%88%BF/@24.1529883,120.6576767,15z/data=!3m2!4b1!5s0x34685acc9cac54a3:0xa3761c64a0b24093!4m6!3m5!1s0x34693dc3f1ac285d:0xa5bd17abab71e73d!8m2!3d24.152969!4d120.6664315!16s%2Fg%2F11g1fpkyfv'">
+                                前往</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>力宴健身中心</td>
+                        <td>尖峰時段 $250<br>
+                            平日 17:00-22:00<br>
+                            例假日 13:00-18:00<br>
+                            離峰時段 $180
+                        </td>
+                        <td>06:00-24:00</td>
+                        <td>
+                            進場方式使用手機 QR code<br>
+                            附設休息區<br>
+                            販售乳清蛋白和市售能量飲料<br>
+                        </td>
+                        <td align="center" valign="center">
+                            <button class="bt"
+                                onclick="location.href='https://www.google.com/maps/place/%E5%8A%9B%E5%AE%B4%E5%81%A5%E8%BA%AB+Harfez+Fitness/@24.1583045,120.6519827,15z/data=!3m1!4b1!4m6!3m5!1s0x34693d62e0fd0aa9:0x4ba37fe3eba5adcc!8m2!3d24.1582852!4d120.6607375!16s%2Fg%2F11fp4s42jr'">
+                                前往</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>美力健身房</td>
+                        <td>
+                            2、3樓：$150（打卡 $100）<br>
+                            全館：$300（打卡 $200）<br>
+                            無會員費
+                        </td>
+                        <td>
+                            平日 09:00-23:00<br>
+                            週末 09:00-22:00
+
+                        </td>
+                        <td>
+                            附近停車場很多<br>
+                            有置物櫃以及放鬆聊天的座位區
+                        </td>
+                        <td align="center" valign="center">
+                            <button class="bt"
+                                onclick="location.href='hhttps://www.google.com/maps/place/%E3%80%90%E7%BE%8E%E5%8A%9B%E5%81%A5%E8%BA%AB%E4%B8%AD%E5%BF%83%E3%80%91%E5%8F%B0%E4%B8%AD%E5%81%A5%E8%BA%AB%E6%88%BF+%7C%E5%81%A5%E8%BA%AB%E6%95%99%E7%B7%B4%E8%AA%B2%E7%A8%8B%7C+MERRY+GYM%EF%BC%8A%E5%81%A5%E8%BA%AB%E6%95%99%E7%B7%B4%E6%8E%A8%E8%96%A6%7C%E5%8C%97%E5%8D%80%E5%81%A5%E8%BA%AB%E6%88%BF%7C%E9%81%8B%E5%8B%95%E4%B8%AD%E5%BF%83+%E6%B8%9B%E8%82%A5+%E9%87%8D%E8%A8%93/@24.1460644,120.6742953,15z/data=!3m1!4b1!4m6!3m5!1s0x140f3334ee475ceb:0xec2b3e5afbde72df!8m2!3d24.1460451!4d120.6830501!16s%2Fg%2F11xhnpq72'">
+                                前往</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>史壯健身房</td>
+                        <td>$100<br>
+                            無會員費<br>
+                            每堂 $300 的團體課
+                        </td>
+                        <td>
+                            8:00-23:00
+                        </td>
+                        <td>
+                            衛浴兩間乾濕分離<br>
+                            置物櫃需要自帶鎖頭和毛巾<br>
+                            也有展售 SBD 腰帶和單包裝乳清<br>
+                        </td>
+                        <td align="center" valign="center">
+                            <button class="bt"
+                                onclick="location.href='https://www.google.com/maps/place/%E5%8F%B2%E5%A3%AF%E5%81%A5%E8%BA%AB/@24.1687109,120.6593904,15z/data=!3m1!4b1!4m6!3m5!1s0x346917b1f20d906f:0xc4bd9b664526cb2b!8m2!3d24.1686916!4d120.6681452!16s%2Fg%2F11fmrprrsr'">
+                                前往</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div id="News" class="tabcontent">
+            <h2>哪間為計時收費？</h2>
+            <table>
+                <tr>
+                    <th>名稱</th>
+                    <th>價錢</th>
+                    <th>營業時間</th>
+                    <th>環境</th>
+                    <th>連結</th>
+                </tr>
+                <tr>
+                    <td>啟動健身中心</td>
+                    <td>$1/1 分鐘<br>
+                        制卡費 $200
+                    </td>
+                    <td>
+                        7:00-24:00
+                    </td>
+                    <td>
+                        擁有人臉辨識系統置物櫃<br>
+                        友善的女性專屬專區<br>
+                        草皮放鬆區<br>
+                        物理治療師進駐
+                    </td>
+                    <td align="center" valign="center">
+                        <button class="bt"
+                            onclick="location.href='https://www.google.com/maps/place/ACTION+FITNESS+%E5%95%9F%E5%8B%95%E5%81%A5%E8%BA%AB%E6%88%BF/@24.1689795,120.5280593,11z/data=!4m10!1m2!2m1!1z5ZWf5YuV5YGl6Lqr5Lit5b-D!3m6!1s0x34693d65813da0a3:0xfcd7ce78179d960!8m2!3d24.152766!4d120.6806568!15sChLllZ_li5XlgaXouqvkuK3lv4OSAQ5maXRuZXNzX2NlbnRlcuABAA!16s%2Fg%2F11ggrs09p4'">
+                            前往</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Fitbox Gym </td>
+                    <td>$1/1 分鐘<br>
+                        會員卡 $200＋保險費 $300<br>
+                        最低儲值 $100，每次低消 60 分鐘<br>
+                        不時有優惠方案，可至官方臉書查看
+                    </td>
+                    <td>
+                        太原館<br>
+                        週一到週六 07:30-24:00<br>
+                        週日 09:00-24:00<br>
+                        大雅館<br>
+                        平日 07:00-23:30<br>
+                        假日 08:00-23:30<br>
+                        公益館 <br>
+                        週一到週六 07:30-24:00<br>
+                        週日 09:00-24:00
+                    </td>
+                    <td>
+                        採用美國知名品牌<br>
+                        機械器材非常多樣且新穎
+                    </td>
+                    <td align="center" valign="center">
+                        <button class="bt"
+                            onclick="location.href='https://www.google.com/maps/place/FITBOX+Gym%E5%81%A5%E8%BA%AB%E4%B8%AD%E5%BF%83+-+%E5%A4%AA%E5%8E%9F%E9%A4%A8/@24.1699766,120.5280583,11z/data=!3m1!5s0x34693d7df500da63:0xb7c3c670e9e7d6cf!4m10!1m2!2m1!1sFitbox+Gym!3m6!1s0x34693dc5f6976bff:0x71f6a046be5ff804!8m2!3d24.1647999!4d120.6730401!15sCgpGaXRib3ggR3ltkgEDZ3lt4AEA!16s%2Fg%2F11f7grt5d_'">
+                            太原館</button><br>
+                        <button class="bt" style="margin-top: 10px;"
+                            onclick="location.href='https://www.google.com/maps/place/Fitbox+Gym%E5%81%A5%E8%BA%AB%E4%B8%AD%E5%BF%83+-+%E5%85%AC%E7%9B%8A%E9%A4%A8/@24.1704752,120.5280578,11z/data=!4m10!1m2!2m1!1sFitbox+Gym!3m6!1s0x34693d0d44f29a15:0x8eb554fd9cec3f72!8m2!3d24.1501336!4d120.647922!15sCgpGaXRib3ggR3ltWgwiCmZpdGJveCBneW2SAQNneW3gAQA!16s%2Fg%2F11r_tyx12c'">
+                            公益館</button><br>
+                        <button class="bt" style="margin-top: 10px;"
+                            onclick="location.href='https://www.google.com/maps/place/FITBOX+Gym+%E5%81%A5%E8%BA%AB%E4%B8%AD%E5%BF%83+-+%E5%A4%A7%E9%9B%85%E9%A4%A8+%7C+%E6%8E%A8%E8%96%A6%E6%8B%B3%E6%93%8A+%7C+%E9%81%8B%E5%8B%95%E8%A8%93%E7%B7%B4+%7C+%E9%AB%94%E8%83%BD%E8%A8%93%E7%B7%B4+%7C+%E7%A7%81%E4%BA%BA%E6%95%99%E7%B7%B4%E6%8E%A8%E8%96%A6+%7C+%E5%A4%A7%E9%9B%85%E5%81%A5%E8%BA%AB%E6%88%BF%E6%8E%A8%E8%96%A6+%7C/@24.1704752,120.5280578,11z/data=!4m10!1m2!2m1!1sFitbox+Gym!3m6!1s0x34691702a793ef4d:0xa6aeb097e27bf5dc!8m2!3d24.2221953!4d120.6470991!15sCgpGaXRib3ggR3ltWgwiCmZpdGJveCBneW2SAQNneW3gAQA!16s%2Fg%2F11fkvntg89'">
+                            大雅館</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="Contact" class="tabcontent">
+            <h2>哪間設有女性運動專區？</h2>
+            <table>
+                <tr>
+                    <th>名稱</th>
+                    <th>價錢</th>
+                    <th>營業時間</th>
+                    <th>環境</th>
+                    <th>連結</th>
+                </tr>
+                <tr>
+                    <td>悍草訓練</td>
+                    <td>單次入場：$300<br>
+                        不綁約訂閱制：$825/月<br>
+                        一年約：$9,900
+                    </td>
+                    <td>
+                        週一至週六 07:00-00:00<br>
+                        週日 10:00-19:00
+                    </td>
+                    <td>
+                        擁有人臉辨識系統置物櫃<br>
+                        友善的女性優先專區<br>
+                    </td>
+                    <td align="center" valign="center">
+                        <button class="bt"
+                            onclick="location.href='https://www.google.com/maps/place/%E6%82%8D%E8%8D%89%E8%A8%93%E7%B7%B4+HANDS+UP+TRAINING+%E8%A5%BF%E5%8D%80%E5%96%AE%E6%AC%A1%E5%81%A5%E8%BA%AB%E6%88%BF/@24.1529883,120.6576767,15z/data=!3m2!4b1!5s0x34685acc9cac54a3:0xa3761c64a0b24093!4m6!3m5!1s0x34693dc3f1ac285d:0xa5bd17abab71e73d!8m2!3d24.152969!4d120.6664315!16s%2Fg%2F11g1fpkyfv'">
+                            前往</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>啟動健身中心</td>
+                    <td>$1/1 分鐘<br>
+                        制卡費 $200
+                    </td>
+                    <td>
+                        7:00-24:00
+                    </td>
+                    <td>
+                        擁有人臉辨識系統置物櫃<br>
+                        友善的女性專屬專區<br>
+                        草皮放鬆區<br>
+                        物理治療師進駐
+                    </td>
+                    <td align="center" valign="center">
+                        <button class="bt"
+                            onclick="location.href='https://www.google.com/maps/place/ACTION+FITNESS+%E5%95%9F%E5%8B%95%E5%81%A5%E8%BA%AB%E6%88%BF/@24.153257,120.5263456,11z/data=!4m10!1m2!2m1!1z5ZWf5YuV5YGl6Lqr5Lit5b-D!3m6!1s0x34693d65813da0a3:0xfcd7ce78179d960!8m2!3d24.152766!4d120.6806568!15sChLllZ_li5XlgaXouqvkuK3lv4OSAQ5maXRuZXNzX2NlbnRlcuABAA!16s%2Fg%2F11ggrs09p4'">
+                            前往</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="About" class="tabcontent">
+            <h2>哪間提供每日訓練菜單？</h2>
+            <table>
+                <tr>
+                    <th>名稱</th>
+                    <th>價錢</th>
+                    <th>營業時間</th>
+                    <th>環境</th>
+                    <th>連結</th>
+                </tr>
+                <tr>
+                    <td>史壯健身房</td>
+                    <td>$100<br>
+                        無會員費<br>
+                        每堂 $300 的團體課
+                    </td>
+                    <td>
+                        8:00-23:00
+                    </td>
+                    <td>
+                        衛浴兩間乾濕分離<br>
+                        置物櫃需要自帶鎖頭和毛巾<br>
+                        也有展售 SBD 腰帶和單包裝乳清<br>
+                    </td>
+                    <td align="center" valign="center">
+                        <button class="bt"
+                            onclick="location.href='https://www.google.com/maps/place/%E5%8F%B2%E5%A3%AF%E5%81%A5%E8%BA%AB/@24.1686916,120.6659565,17z/data=!3m1!4b1!4m6!3m5!1s0x346917b1f20d906f:0xc4bd9b664526cb2b!8m2!3d24.1686916!4d120.6681452!16s%2Fg%2F11fmrprrsr'">
+                            前往</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        function openPage(pageName, elmnt, color) {
+            // Hide all elements with class="tabcontent" by default */
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Remove the background color of all tablinks/buttons
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].style.backgroundColor = "";
+            }
+
+            // Show the specific tab content
+            document.getElementById(pageName).style.display = "block";
+
+            // Add the specific color to the button used to open the tab content
+            elmnt.style.backgroundColor = color;
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+
+    </script>
+
+
+    <!-- 找健身房 -->
+
+    <div id="gym">
+        <h1>定位尋找健身房</h1>
+        <div id="map"></div>
+    </div>
+    <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
+    <script>
+        // 抓取json資料 分析出來
+        function Location(name, vicinity, lat, lng) {
+            this.name = name
+            this.vicinity = vicinity
+            this.lat = lat
+            this.lng = lng
+            this.title = name
+            this.center = { lat: parseFloat(lat), lng: parseFloat(lng) }
+
+        }
+
+        window.onload = function () {
+            fetch("./GYM.php")
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (jsonObj) {
+                    let results = []
+                    jsonObj["results"].forEach(function (rd) {
+                        results.push(new Location(rd.name, rd.vicinity, rd.geometry.location.lat, rd.geometry.location.lng))
+                    })
+                    console.log(results)
+                    pinMarkersCluster(results)
+                })
+            // 叢集標籤
+            function pinMarkersCluster(results) {
+                let markers = []
+                for (let i = 0; i < results.length; i++) {
+                    marker = new google.maps.Marker({
+                        position: results[i].center,
+                        title: results[i].name,
+                        map: map,
+                        label: results.aqi
+                    })
+                    markers.push(marker)
+
+                    infowindow = new google.maps.InfoWindow({
+                        content: results[i].name
+                    })
+                    openw(marker)
+                }
+                new markerClusterer.MarkerClusterer({ markers, map })
+            }
+            // 監聽標籤按下事件
+            function openw(marker) {
+                marker.addListener("click", function () {
+                    infowindow.close()
+                    infowindow = new google.maps.InfoWindow({
+                        content: marker.getTitle()
+                    })
+                    infowindow.open({
+                        anchor: marker,
+                        map
+                    })
+                })
+            }
+        }
+    </script>
+    <script>
+
+        let map;
+
+        // 設置定位按鈕
+        function mapCenterControl(map, clickButton) {
+            let centerControlDiv = document.createElement('div');
+
+            // Set CSS for the control border.
+            let controlUI = document.createElement('button');
+            controlUI.style.backgroundColor = '#fff';
+            controlUI.style.border = 'none';
+            controlUI.style.outline = 'none';
+            controlUI.style.width = '40px';
+            controlUI.style.height = '40px';
+            controlUI.style.borderRadius = '2px';
+            controlUI.style.boxShadow = '0 1px 4px rgba(0,0,0,0.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.marginRight = '10px';
+            controlUI.style.padding = '0';
+            controlUI.title = 'Your Location';
+            centerControlDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior.
+            let controlText = document.createElement('div');
+            controlText.style.margin = '10px';
+            controlText.style.width = '30px';
+            controlText.style.height = '30px';
+            controlText.style.backgroundImage = "url('imge/gpsicon.png')";
+            controlText.style.backgroundSize = '20px 20px';
+            controlText.style.backgroundPosition = '0px 0px';
+            controlText.style.backgroundRepeat = 'no-repeat';
+            controlUI.appendChild(controlText);
+
+            // constructor passing in this DIV.
+            centerControlDiv.index = 1; // 排列優先度
+            map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(centerControlDiv); // 設定按鈕加入地圖的位置
+
+            // Setup the click event listeners.
+            controlUI.addEventListener('click', () => clickButton());
+        }
+
+
+        // 取得使用者位置
+        function gettingPosition() {
+            if (navigator.geolocation) {
+                return new Promise((resolve, reject) => {
+                    let option = {
+                        enableAcuracy: false, // 提高精確度
+                        maximumAge: 0, // 設定上一次位置資訊的有效期限(毫秒)
+                        timeout: 10000 // 逾時計時器(毫秒)
+                    };
+                    navigator.geolocation.getCurrentPosition(resolve, reject, option);
+                })
+            } else {
+                alert("Does not support positioning!");
+            }
+        }
+        function successCallback(position) {
+            console.log(position)
+            map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
+
+            new google.maps.Marker({
+                map: map,
+                position: { lat: position.coords.latitude, lng: position.coords.longitude },
+                icon: {
+                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                },
+                zoom:30
+            });
+        }
+
+
+
+
+        function errorCallback(error) {
+            alert(error.message); //error.code
+        }
+
+        //預設位置台中火車站
+        function initMap() {
+            const myLatlng = { lat: 24.13755235118858, lng: 120.68699483743649 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: myLatlng,
+            });
+            mapCenterControl(map,
+                () => gettingPosition()
+                    .then(position => successCallback(position))
+                    .catch(error => errorCallback(error))
+            )
+            // // 設定標籤
+
+            let infoWindow = new google.maps.InfoWindow({
+                content: "點選標籤取得店名",
+                position: myLatlng,
+            });
+
+            infoWindow.open(map);
+            // Configure the click listener.
+
+
+        }
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxplkQQN1mTOSfOn0ww_0v1UAHRKH05cU&callback=initMap&v=weekly"
+        defer></script>
+    <!-- 頁尾 -->
+    <footer class="row1">
+        <div class="FtLogo column1"></div>
+        <div class="FtSocial column2">
+            <div id="demo">如果對減肥減脂有興趣的話,歡迎聯絡我們</div>
+            <br>
+            <br>
+            <br>
+            <div>聯絡信箱 abc0800.gmail.com,聯絡電話 0800-123-123</div>
+        </div>
+    </footer>
+    <!-- 返回側邊 -->
+    <!-- 回到頁首 -->
+    <a href="#myTopnav">
+        <aside></aside>
+    </a>
+</body>
+
+</html>
